@@ -1,0 +1,58 @@
+# Eclipse
+*.pydevproject
+.project
+/.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# Maven
+target/
+
+# Gradle
+build/
+
+# IntelliJ
+.idea/
+
+# Compiled class file
+*.class
+
+# Log files
+*.log
+
+# BlueJ
+*.ctxt
+
+# Javadoc
+*.jar
+*.war
+*.ear
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# macOS
+.DS_Store
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDouble
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
