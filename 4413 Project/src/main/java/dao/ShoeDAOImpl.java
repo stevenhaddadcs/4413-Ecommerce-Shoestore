@@ -207,6 +207,7 @@ public class ShoeDAOImpl implements ShoeDAO {
 				String brand = resultSet.getString("brand");
 				float price = resultSet.getFloat("price");
 				String imageString = resultSet.getString("image_name");
+				int stock = resultSet.getInt("stock");
 				
 				shoe.setId(id);
 				shoe.setModel(model);
@@ -214,6 +215,7 @@ public class ShoeDAOImpl implements ShoeDAO {
 				shoe.setBrand(brand);
 				shoe.setPrice(price);
 				shoe.setImageString(imageString);
+				shoe.setStock(stock);
 				result.add(shoe);
 			}
 		} catch (SQLException ex) {
