@@ -190,7 +190,7 @@ public class ShoeDAOImpl implements ShoeDAO {
 				+ "       SHOETYPES.MODEL, SHOETYPES.COLOURWAY, SHOETYPES.BRAND, SHOETYPES.PRICE, SHOETYPES.IMAGE_NAME\r\n"
 				+ "FROM SHOESTOCK\r\n"
 				+ "INNER JOIN SHOETYPES ON SHOESTOCK.shoe_id = SHOETYPES.shoe_id\r\n"
-				+ "WHERE SHOESTOCK.shoe_size = '?' AND SHOESTOCK.stock > 0;\r\n";
+				+ "WHERE SHOESTOCK.shoe_size = ? AND SHOESTOCK.stock > 0;\r\n";
 		Connection connection = null;
 		try {
 			connection = getConnection();
