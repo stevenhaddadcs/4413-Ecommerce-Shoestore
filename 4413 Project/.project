@@ -3,6 +3,9 @@
 	<name>4413 Project</name>
 	<comment></comment>
 	<projects>
+		<project>taglibs-standard-spec-1.2.5</project>
+		<project>taglibs-standard-impl-1.2.5</project>
+		<project>sqlite-jdbc-3.42.0.0</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

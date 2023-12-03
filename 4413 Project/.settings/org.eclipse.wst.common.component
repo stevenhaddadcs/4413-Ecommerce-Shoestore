@@ -2,6 +2,15 @@
     <wb-module deploy-name="4413 Project">
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <dependent-module archiveName="taglibs-standard-spec-1.2.5.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/taglibs-standard-spec-1.2.5/taglibs-standard-spec-1.2.5">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="taglibs-standard-impl-1.2.5.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/taglibs-standard-impl-1.2.5/taglibs-standard-impl-1.2.5">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="sqlite-jdbc-3.42.0.0.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/sqlite-jdbc-3.42.0.0/sqlite-jdbc-3.42.0.0">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="4413_Project"/>
         <property name="java-output-path" value="/4413 Project/build/classes"/>
     </wb-module>
