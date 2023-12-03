@@ -14,6 +14,8 @@ public interface ShoeDAO {
 	public List<Shoe> searchShoesByKeyword(String keyWord);
 	
 	public List<String> findAllBrands();
+	
+	public List<Shoe> findShoesInSize(String size);
 
 	public void insert(Shoe shoe);
 

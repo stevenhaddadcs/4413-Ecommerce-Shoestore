@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="ImportExportAction">
-		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="org.eclipse.jst.servlet.ui.internal.wizard.WebComponentImportWizard"/>
+		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="org.eclipse.ui.wizards.import.ZipFile"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
+			<item value="org.eclipse.ui.Basic"/>
 			<item value="org.eclipse.wst.web.ui"/>
 		</list>
 	</section>
 	<section name="NewWizardAction">
 		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.jdt.ui.wizards.NewClassCreationWizard"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+		</list>
+	</section>
+	<section name="ZipFileImportWizard">
+		<item key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID" value="false"/>
+		<list key="WizardZipFileResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\Steven\Downloads\4413_Project (1).zip"/>
 		</list>
 	</section>
 </section>

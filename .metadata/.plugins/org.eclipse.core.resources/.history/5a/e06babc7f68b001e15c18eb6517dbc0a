@@ -1,7 +1,0 @@
-package dao;
-
-public interface ShoesDAO {
-	
-	public getShoeStocks(String shoe_id);
-
-}

@@ -182,6 +182,49 @@ public class ShoeDAOImpl implements ShoeDAO {
 		return result;
 	}
 	
+	public List<Shoe> findShoesInSize(String size) {
+		List<Shoe> result = new ArrayList<Shoe>();
+		 
+		//find only models that are available in a certain size
+		String sql = "SELECT SHOESTOCK.stock_id, SHOESTOCK.shoe_id, SHOESTOCK.shoe_size, SHOESTOCK.stock,\r\n"
+				+ "       SHOETYPES.MODEL, SHOETYPES.COLOURWAY, SHOETYPES.BRAND, SHOETYPES.PRICE, SHOETYPES.IMAGE_NAME\r\n"
+				+ "FROM SHOESTOCK\r\n"
+				+ "INNER JOIN SHOETYPES ON SHOESTOCK.shoe_id = SHOETYPES.shoe_id\r\n"
+				+ "WHERE SHOESTOCK.shoe_size = '?' AND SHOESTOCK.stock > 0;\r\n";
+		Connection connection = null;
+		try {
+			connection = getConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, size);
+			ResultSet resultSet =  statement.executeQuery();
+			while (resultSet.next()) {
+				
+				Shoe shoe = new Shoe();
+				
+				int id = resultSet.getInt("shoe_id");
+				String model = resultSet.getString("model");
+				String colourway = resultSet.getString("colourway");
+				String brand = resultSet.getString("brand");
+				float price = resultSet.getFloat("price");
+				String imageString = resultSet.getString("image_name");
+				
+				shoe.setId(id);
+				shoe.setModel(model);
+				shoe.setColourway(colourway);
+				shoe.setBrand(brand);
+				shoe.setPrice(price);
+				shoe.setImageString(imageString);
+				result.add(shoe);
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			closeConnection(connection);
+		}
+		return result;
+	
+	}
+	
 	
 	public void insert(Shoe shoe) {
 		Connection connection = null;
@@ -266,6 +309,7 @@ public class ShoeDAOImpl implements ShoeDAO {
 				String brand = resultSet.getString("brand");
 				float price = resultSet.getFloat("price");
 				String imageString = resultSet.getString("image_name");
+				int stock = resultSet.getInt("stock");
 				
 				shoe.setId(id);
 				shoe.setModel(model);
@@ -273,6 +317,8 @@ public class ShoeDAOImpl implements ShoeDAO {
 				shoe.setBrand(brand);
 				shoe.setPrice(price);
 				shoe.setImageString(imageString);
+				//show stock in the display
+				shoe.setStock(stock);
 				result.add(shoe);
 			}
 		} catch (SQLException ex) {
