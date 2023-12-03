@@ -1,0 +1,5 @@
+#Tomcat publish data
+#Sat Nov 25 19:02:27 EST 2023
+org.eclipse.jst.j2ee.server\:sqlite-jdbc-3.42.0.0=WEB-INF/lib/sqlite-jdbc-3.42.0.0.jar
+org.eclipse.jst.j2ee.server\:taglibs-standard-impl-1.2.5=WEB-INF/lib/taglibs-standard-impl-1.2.5.jar
+org.eclipse.jst.j2ee.server\:taglibs-standard-spec-1.2.5=WEB-INF/lib/taglibs-standard-spec-1.2.5.jar

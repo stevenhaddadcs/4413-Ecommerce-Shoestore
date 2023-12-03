@@ -1,0 +1,7 @@
+package dao;
+
+public interface ShoesDAO {
+	
+	public ShoeType getAllShoes();
+
+}
