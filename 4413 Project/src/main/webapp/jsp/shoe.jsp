@@ -13,7 +13,7 @@
 <body>
  	<jsp:include page="header.jsp" flush="true" />
  	<jsp:include page="leftColumn.jsp" flush="true" />
- 
+ 	<form method = "get" action = "CartServlet">
     <div>
         <c:if test="${param.model != null}" > 
          <span class="label" style="margin-left: 15px;"> List of ${param.model} Sizes and Stock
@@ -29,7 +29,6 @@
                 <th id="th-price">Price</th>
                 <th id="th-size">Size</th>
                 <th id="th-stock">Stock</th>
-                
             </tr>
         </thead>
 		<tr>
@@ -48,7 +47,7 @@
 				<script type="text/javascript">
 					//get the stock value based on the selected option from the sizeSelect drop-down list
 					function changeStock(index){
-
+						
 						switch (index){
 						case 0:
 							document.getElementById('stock').value=${requestScope.shoeStockList[0].getStock()};
@@ -99,6 +98,7 @@
 			<td><img src = "${initParam.imageURL}/${requestScope.shoeStockList[0].getImageString()}"/></td>
 		</tr>
 	</table>
-	
+	<input type ="submit"  value = "Add to Cart"/>
+	</form>
 </body>
 </html>

@@ -24,4 +24,7 @@ public class Cart {
 		
 		cart.add(shoe);
 	}
+	public void remove(int id) {
+		
+	}
 }
