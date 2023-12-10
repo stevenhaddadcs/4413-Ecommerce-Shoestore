@@ -50,7 +50,8 @@ public class ShoeController extends HttpServlet {
 		String action = request.getParameter("action");
 		String brand = request.getParameter("brand");
 		String keyWord = request.getParameter("keyWord");
-		String stock = request.getParameter("stock");
+		String model = request.getParameter("model");
+		String colour = request.getParameter("colour");
 		if (action != null) {
 			switch (action) {
 			case "allShoes":
@@ -66,10 +67,10 @@ public class ShoeController extends HttpServlet {
 				url = base + "searchResult.jsp";
 				break;
 			case "stock":
-				findStockByShoe(request, response,stock);
-				url = base + "shoe.jsp?model=" + stock;
+				findStockByShoe(request, response,model,colour);
+				url = base + "shoe.jsp?model=" + model+"&colour=" + colour;
 				break;
-
+				
 			}
 		}
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
@@ -120,12 +121,12 @@ public class ShoeController extends HttpServlet {
 	}
 	
 	private void findStockByShoe(HttpServletRequest request,
-			HttpServletResponse response, String stock)
+			HttpServletResponse response, String model, String colour)
 			throws ServletException, IOException {
 		try {
 
 			ShoeDAO shoeDao = new ShoeDAOImpl(context);
-			List<Shoe> shoeList = shoeDao.searchShoesByModel(stock);
+			List<Shoe> shoeList = shoeDao.searchShoesByModel(model, colour);
 			
 			for(int i = 0; i < shoeList.size(); i++) {
 				

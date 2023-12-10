@@ -9,7 +9,7 @@ public interface ShoeDAO {
 
 	public List<Shoe> findAllShoes();
 	
-	public List<Shoe> searchShoesByModel(String m);
+	public List<Shoe> searchShoesByModel(String m, String c);
 	
 	public List<Shoe> searchShoesByKeyword(String keyWord);
 	

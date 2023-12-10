@@ -11,8 +11,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
 <body>
- 
- 	<jsp:include page="brand.jsp" flush="true" />
+ 	<jsp:include page="header.jsp" flush="true" />
+ 	<jsp:include page="leftColumn.jsp" flush="true" />
  
     <div>
         <c:if test="${param.model != null}" > 
@@ -20,10 +20,9 @@
          </span>
         </c:if>
     </div>
-
-     
-    <table id="grid">
-        <thead>
+    
+	<table>
+	     <thead>
             <tr>
                 <th id="th-name">Model</th>
                 <th id="th-colour">Colour</th>
@@ -33,24 +32,73 @@
                 
             </tr>
         </thead>
+		<tr>
+			<td><p id = "caption">${requestScope.shoeStockList[0].getModel()}</p></td>
+			<td><p id = "caption">${requestScope.shoeStockList[0].getColourway()}</p></td>
+			<td><p id = "caption">$${requestScope.shoeStockList[0].getPrice()}</p></td>
+			<td>
+				<select id="sizeSelect" onchange="changeStock(this.selectedIndex);">
+					<c:forEach items="${requestScope.shoeStockList}" var="e">
+						<option value ="${e.size}">${e.size}</option>
+					</c:forEach>
+				</select>
+			</td>
+			<td>
+				<input type = "text" id="stock" value = "${requestScope.shoeStockList[0].getStock()}"/>
+				<script type="text/javascript">
+					//get the stock value based on the selected option from the sizeSelect drop-down list
+					function changeStock(index){
 
-
-        <tbody>
-        
-            
-         <c:forEach items="${requestScope.shoeStockList}" var="e">
-            <tr>
-             <td> ${e.model}</td>
-             <td> ${e.colourway} </td>
-             <td> ${e.price} </td>
-             <td> ${e.size} </td>
-             <td> ${e.stock} </td>
-            </tr>
-            </c:forEach>
-     
-
-        </tbody>
-
-    </table>
+						switch (index){
+						case 0:
+							document.getElementById('stock').value=${requestScope.shoeStockList[0].getStock()};
+							break;
+						case 1:
+							document.getElementById('stock').value=${requestScope.shoeStockList[1].getStock()};
+							break;
+						case 2:
+							document.getElementById('stock').value=${requestScope.shoeStockList[2].getStock()};
+							break;
+						case 3:
+							document.getElementById('stock').value=${requestScope.shoeStockList[3].getStock()};
+							break;
+						case 4:
+							document.getElementById('stock').value=${requestScope.shoeStockList[4].getStock()};
+							break;
+						case 5:
+							document.getElementById('stock').value=${requestScope.shoeStockList[5].getStock()};
+							break;
+						case 6:
+							document.getElementById('stock').value=${requestScope.shoeStockList[6].getStock()};
+							break;
+						case 7:
+							document.getElementById('stock').value=${requestScope.shoeStockList[7].getStock()};
+							break;
+						case 8:
+							document.getElementById('stock').value=${requestScope.shoeStockList[8].getStock()};
+							break;
+						case 9:
+							document.getElementById('stock').value=${requestScope.shoeStockList[9].getStock()};
+							break;
+						case 10:
+							document.getElementById('stock').value=${requestScope.shoeStockList[10].getStock()};
+							break;
+						case 11:
+							document.getElementById('stock').value=${requestScope.shoeStockList[11].getStock()};
+							break;
+						case 12:
+							document.getElementById('stock').value=${requestScope.shoeStockList[12].getStock()};
+							break;
+						} 
+					}
+				
+				</script>
+			</td>
+		</tr>
+		<tr>
+			<td><img src = "${initParam.imageURL}/${requestScope.shoeStockList[0].getImageString()}"/></td>
+		</tr>
+	</table>
+	
 </body>
 </html>

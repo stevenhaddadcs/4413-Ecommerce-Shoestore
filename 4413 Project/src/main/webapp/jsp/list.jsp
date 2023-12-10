@@ -13,10 +13,11 @@
 <body>
 
     <div>
-        <c:if test="${param.brand != null || param.keyWord != null}" > 
+        <c:if test="${param.brand != null}" > 
          <span class="label" style="margin-left: 15px;"> List of ${param.brand}  Shoes
          </span>
-     
+         </c:if>
+     <c:if test="${param.brand != null || param.keyWord != null || param.action != null}" >
     <table id="grid">
         <thead>
             <tr>
@@ -34,7 +35,7 @@
             
          <c:forEach items="${requestScope.shoeList}" var="e">
             <tr>
-            <td> <a href="${initParam.param1}?action=stock&stock=${e.model}"><img src="${initParam.imageURL}/${e.imageString}"/></a></td>
+            <td> <a href="${initParam.param1}?action=stock&model=${e.model}&colour=${e.colourway}"><img src="${initParam.imageURL}/${e.imageString}"/></a></td>
              <td> ${e.model}</td>
              <td> ${e.colourway} </td>
              <td> ${e.price} </td>

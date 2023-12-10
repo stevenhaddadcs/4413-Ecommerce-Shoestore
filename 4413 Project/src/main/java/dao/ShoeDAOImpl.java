@@ -80,10 +80,10 @@ public class ShoeDAOImpl implements ShoeDAO {
 	}
 
 	@Override
-	public List<Shoe> searchShoesByModel(String m) {
+	public List<Shoe> searchShoesByModel(String m, String c) {
 		List<Shoe> result = new ArrayList<Shoe>();
 		
-		String sql = "select * from shoetypes join shoestock where model = '"+ m + "' and shoetypes.shoe_id = shoestock.shoe_id";
+		String sql = "select * from shoetypes join shoestock where model = '"+ m + "'and colourway = '"+ c + "' and shoetypes.shoe_id = shoestock.shoe_id";
 
 		Connection connection = null;
 		try {
@@ -311,7 +311,7 @@ public class ShoeDAOImpl implements ShoeDAO {
 				String brand = resultSet.getString("brand");
 				float price = resultSet.getFloat("price");
 				String imageString = resultSet.getString("image_name");
-				int stock = resultSet.getInt("stock");
+				//int stock = resultSet.getInt("stock");
 				
 				shoe.setId(id);
 				shoe.setModel(model);
@@ -320,7 +320,7 @@ public class ShoeDAOImpl implements ShoeDAO {
 				shoe.setPrice(price);
 				shoe.setImageString(imageString);
 				//show stock in the display
-				shoe.setStock(stock);
+				//shoe.setStock(stock);
 				result.add(shoe);
 			}
 		} catch (SQLException ex) {
