@@ -30,9 +30,9 @@ public class ShoeController extends HttpServlet {
 		super.init(config);
 		
 		context = config.getServletContext();
-		ShoeDAO bookDao = new ShoeDAOImpl(context);
+		ShoeDAO shoeDAO = new ShoeDAOImpl(context);
 		// calling DAO method to retrieve category List from Database, for left column display
-		List<String> brandList =  bookDao.findAllBrands();
+		List<String> brandList =  shoeDAO.findAllBrands();
 		context.setAttribute("brandList", brandList);
 
 	}

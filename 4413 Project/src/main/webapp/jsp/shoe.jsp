@@ -13,7 +13,7 @@
 <body>
  	<jsp:include page="header.jsp" flush="true" />
  	<jsp:include page="leftColumn.jsp" flush="true" />
- 	<form method = "get" action = "CartServlet">
+ 	<form method = "get" action = "CartController">
     <div>
         <c:if test="${param.model != null}" > 
          <span class="label" style="margin-left: 15px;"> List of ${param.model} Sizes and Stock
@@ -36,7 +36,7 @@
 			<td><p id = "caption">${requestScope.shoeStockList[0].getColourway()}</p></td>
 			<td><p id = "caption">$${requestScope.shoeStockList[0].getPrice()}</p></td>
 			<td>
-				<select id="sizeSelect" onchange="changeStock(this.selectedIndex);">
+				<select name = "sizeSelect" id="sizeSelect" onchange="changeStock(this.selectedIndex, this.value);">
 					<c:forEach items="${requestScope.shoeStockList}" var="e">
 						<option value ="${e.size}">${e.size}</option>
 					</c:forEach>
@@ -44,61 +44,65 @@
 			</td>
 			<td>
 				<input type = "text" id="stock" value = "${requestScope.shoeStockList[0].getStock()}"/>
-				<script type="text/javascript">
-					//get the stock value based on the selected option from the sizeSelect drop-down list
-					function changeStock(index){
-						
-						switch (index){
-						case 0:
-							document.getElementById('stock').value=${requestScope.shoeStockList[0].getStock()};
-							break;
-						case 1:
-							document.getElementById('stock').value=${requestScope.shoeStockList[1].getStock()};
-							break;
-						case 2:
-							document.getElementById('stock').value=${requestScope.shoeStockList[2].getStock()};
-							break;
-						case 3:
-							document.getElementById('stock').value=${requestScope.shoeStockList[3].getStock()};
-							break;
-						case 4:
-							document.getElementById('stock').value=${requestScope.shoeStockList[4].getStock()};
-							break;
-						case 5:
-							document.getElementById('stock').value=${requestScope.shoeStockList[5].getStock()};
-							break;
-						case 6:
-							document.getElementById('stock').value=${requestScope.shoeStockList[6].getStock()};
-							break;
-						case 7:
-							document.getElementById('stock').value=${requestScope.shoeStockList[7].getStock()};
-							break;
-						case 8:
-							document.getElementById('stock').value=${requestScope.shoeStockList[8].getStock()};
-							break;
-						case 9:
-							document.getElementById('stock').value=${requestScope.shoeStockList[9].getStock()};
-							break;
-						case 10:
-							document.getElementById('stock').value=${requestScope.shoeStockList[10].getStock()};
-							break;
-						case 11:
-							document.getElementById('stock').value=${requestScope.shoeStockList[11].getStock()};
-							break;
-						case 12:
-							document.getElementById('stock').value=${requestScope.shoeStockList[12].getStock()};
-							break;
-						} 
-					}
-				
-				</script>
 			</td>
 		</tr>
 		<tr>
 			<td><img src = "${initParam.imageURL}/${requestScope.shoeStockList[0].getImageString()}"/></td>
 		</tr>
 	</table>
-	<input type ="submit"  value = "Add to Cart"/>
+	<input type = "hidden" name = "action" value = "add"/>
+	<input type = "hidden" name = "model" value = "${requestScope.shoeStockList[0].getModel()}"/>
+	<input type = "hidden" name = "colour" value = "${requestScope.shoeStockList[0].getColourway()}"/>
+	<input type = "hidden" id = "sizeSelected" name ="size" value = ""/>
+	<script type="text/javascript">
+			//get the stock value based on the selected option from the sizeSelect drop-down list
+			function changeStock(index,value){
+					document.getElementById('sizeSelected').value=value;
+					switch (index){
+					case 0:
+						document.getElementById('stock').value=${requestScope.shoeStockList[0].getStock()};
+						break;
+					case 1:
+						document.getElementById('stock').value=${requestScope.shoeStockList[1].getStock()};
+						break;
+					case 2:
+						document.getElementById('stock').value=${requestScope.shoeStockList[2].getStock()};
+						break;
+					case 3:
+						document.getElementById('stock').value=${requestScope.shoeStockList[3].getStock()};
+						break;
+					case 4:
+						document.getElementById('stock').value=${requestScope.shoeStockList[4].getStock()};
+						break;
+					case 5:
+						document.getElementById('stock').value=${requestScope.shoeStockList[5].getStock()};
+						break;
+					case 6:
+						document.getElementById('stock').value=${requestScope.shoeStockList[6].getStock()};
+						break;
+					case 7:
+						document.getElementById('stock').value=${requestScope.shoeStockList[7].getStock()};
+						break;
+					case 8:
+						document.getElementById('stock').value=${requestScope.shoeStockList[8].getStock()};
+						break;
+					case 9:
+						document.getElementById('stock').value=${requestScope.shoeStockList[9].getStock()};
+						break;
+					case 10:
+						document.getElementById('stock').value=${requestScope.shoeStockList[10].getStock()};
+						break;
+					case 11:
+						document.getElementById('stock').value=${requestScope.shoeStockList[11].getStock()};
+						break;
+					case 12:
+						document.getElementById('stock').value=${requestScope.shoeStockList[12].getStock()};
+						break;
+						} 
+					}
+				
+		</script>
+	<a href="${initParam.param2}?action=add"><input type ="submit" value = "Add to Cart"/></a>
 	</form>
 </body>
 </html>

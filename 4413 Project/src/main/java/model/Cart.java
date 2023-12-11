@@ -11,20 +11,22 @@ public class Cart {
 		cart = new ArrayList<Shoe>();
 	}
 	
-	public void add(int id, String model, String colourway, String brand, float price, float size, String imageString, int stock) {
-		Shoe shoe = new Shoe();
-		shoe.setId(id);
-		shoe.setModel(model);
-		shoe.setColourway(colourway);
-		shoe.setBrand(brand);
-		shoe.setPrice(price);
-		shoe.setSize(size);
-		shoe.setImageString(imageString);
-		shoe.setStock(stock);
-		
+	public void add(Shoe shoe) {
 		cart.add(shoe);
 	}
 	public void remove(int id) {
+		for(int i = 0; i < cart.size();) {
+			if(cart.get(i).getId() == id) {
+				cart.remove(i);
+			}
+		}
 		
 	}
+	
+	public List<Shoe> getAll(){
+		return cart;
+	}
+	
+	
+	
 }

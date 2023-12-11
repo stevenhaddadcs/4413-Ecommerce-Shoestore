@@ -331,7 +331,47 @@ public class ShoeDAOImpl implements ShoeDAO {
 
 		return result;
 	}
+	
+	public Shoe searchShoesByMCS(String m, String c, String s) {
+		
+		Shoe result = new Shoe();
+		String sql = "select * from shoetypes join shoestock where model = '"+ m + "'and colourway = '"+ c + "' and shoetypes.shoe_id = shoestock.shoe_id and shoestock.shoe_size ='"+s+"'";
 
+		Connection connection = null;
+		try {
+
+			connection = getConnection();
+			PreparedStatement statement =  connection.prepareStatement(sql);
+			ResultSet resultSet =  statement.executeQuery();
+			while (resultSet.next()) {
+				
+				Shoe shoe = new Shoe();
+				
+				int id = resultSet.getInt("shoe_id");
+				String model = resultSet.getString("model");
+				String colourway = resultSet.getString("colourway");
+				String brand = resultSet.getString("brand");
+				float price = resultSet.getFloat("price");
+				float size = resultSet.getFloat("shoe_size");
+				String imageString = resultSet.getString("image_name");
+				
+				shoe.setId(id);
+				shoe.setModel(model);
+				shoe.setColourway(colourway);
+				shoe.setBrand(brand);
+				shoe.setPrice(price);
+				shoe.setSize(size);
+				shoe.setImageString(imageString);
+				return shoe;
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			closeConnection(connection);
+		}
+		
+		return result;
+	}
 
 
 }
