@@ -7,7 +7,5 @@ import model.Shoe;
 
 public interface CartDAO {
 
-	public void checkout();
-	
-
+	public void checkout(Cart cart, String username, String cc_number, String address);
 }
