@@ -45,6 +45,11 @@
             <tr>
             <td><input type = "hidden" name = "action" value = "removeShoe"/>
 			<input type ="submit" value = "Remove Checked from Cart"/></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><a href="${initParam.param2}?action=checkout"><button type ="button">Checkout</button></a></td>
             </tr>
 	</table>
 	</form>

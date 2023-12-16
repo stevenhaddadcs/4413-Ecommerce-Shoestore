@@ -72,8 +72,7 @@ public class CartController extends HttpServlet {
 		String model = request.getParameter("model");
 		String colour = request.getParameter("colour");
 		String size = request.getParameter("sizeSelect");
-		
-		System.out.println(action);
+
 		if (action != null) {
 			switch (action) {
 			case "add":
@@ -86,9 +85,13 @@ public class CartController extends HttpServlet {
 			case "removeShoe":
 				removeShoe(request, response);
 				break;			
+			case "checkout":
+				url = base + "checkout.jsp";
+				break;		
 			}
 
 		}
+		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
 		requestDispatcher.forward(request, response);
 		
@@ -126,18 +129,15 @@ public class CartController extends HttpServlet {
 		Cart cart = (Cart) request.getSession(true).getAttribute("cart");
 	    List<Shoe> cartList = cart.getAll();
 	    String[] shoeCheck = request.getParameterValues("shoeCheck");
-	    
-		for(int i = 0; i < shoeCheck.length; i++) {
-			if(shoeCheck[i].equals("on")) {
-				cartList.remove(i);
+	    if(shoeCheck != null) {
+			for(int i = 0; i < shoeCheck.length; i++) {
+				if(shoeCheck[i].equals("on")) {
+					cartList.remove(i);
+				}
 			}
-		}
-		cart.setAll(cartList);
-		request.getSession(true).setAttribute("cart", cart);
+			cart.setAll(cartList);
+			request.getSession(true).setAttribute("cart", cart);
+	    }
 	}
-	
-	
-	
-	
 	
 }
