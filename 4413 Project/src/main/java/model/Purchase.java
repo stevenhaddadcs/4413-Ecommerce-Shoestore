@@ -1,35 +1,33 @@
 package model;
 
-import java.util.Date;
-
 public class Purchase {
-    private int purchaseId;
+    private int purchase_id;
     private String username;
-    private String itemsIds;
-    private String ccNumber;
+    private String items_ids;
+    private String cc_number;
     private String address;
-    private String purchaseDate;
+    private String purchase_date;
 
     // Constructors, getters, and setters
 
-    public Purchase(int purchaseId, String username, String itemsIds, String ccNumber, String address,
-            String purchaseDate) {
-        this.purchaseId = purchaseId;
+    public Purchase(int purchase_id, String username, String items_ids, String cc_number, String address,
+            String purchase_date) {
+        this.purchase_id = purchase_id;
         this.username = username;
-        this.itemsIds = itemsIds;
-        this.ccNumber = ccNumber;
+        this.items_ids = items_ids;
+        this.cc_number = cc_number;
         this.address = address;
-        this.purchaseDate = purchaseDate;
+        this.purchase_date = purchase_date;
     }
 
     // Getters and setters
 
     public int getPurchaseId() {
-        return purchaseId;
+        return purchase_id;
     }
 
-    public void setPurchaseId(int purchaseId) {
-        this.purchaseId = purchaseId;
+    public void setPurchaseId(int purchase_id) {
+        this.purchase_id = purchase_id;
     }
 
     public String getUsername() {
@@ -41,19 +39,19 @@ public class Purchase {
     }
 
     public String getItemsIds() {
-        return itemsIds;
+        return items_ids;
     }
 
-    public void setItemsIds(String itemsIds) {
-        this.itemsIds = itemsIds;
+    public void setItemsIds(String items_ids) {
+        this.items_ids = items_ids;
     }
 
     public String getCcNumber() {
-        return ccNumber;
+        return cc_number;
     }
 
-    public void setCcNumber(String ccNumber) {
-        this.ccNumber = ccNumber;
+    public void setCcNumber(String cc_number) {
+        this.cc_number = cc_number;
     }
 
     public String getAddress() {
@@ -65,10 +63,10 @@ public class Purchase {
     }
 
     public String getPurchaseDate() {
-        return purchaseDate;
+        return purchase_date;
     }
 
-    public void setPurchaseDate(String purchaseDate) {
-        this.purchaseDate = purchaseDate;
+    public void setPurchaseDate(String purchase_date) {
+        this.purchase_date = purchase_date;
     }
 }
