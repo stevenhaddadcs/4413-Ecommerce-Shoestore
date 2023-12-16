@@ -27,6 +27,8 @@ public class Cart {
 		return cart;
 	}
 	
-	
+	public void setAll(List<Shoe> shoes){
+		cart = shoes;
+	}
 	
 }

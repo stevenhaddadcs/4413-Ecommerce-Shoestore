@@ -5,6 +5,6 @@
 	<h2>
 		<span style="margin-left: 15px; margin-top: 15px; " class="label">SHOE
 			<span style= "color: white;">STORE</span></span>
-			<a href="${initParam.param2}?action=view"><span class="label" style="margin-right: 15px;">Cart</span></a>
+			<a href="${initParam.param2}?action=viewCart"><span class="label" style="margin-right: 15px;">Cart</span></a>
 	</h2>
 </div>

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -72,51 +73,34 @@ public class CartController extends HttpServlet {
 		String colour = request.getParameter("colour");
 		String size = request.getParameter("sizeSelect");
 		
-		System.out.println(model + " " + colour + " " + size);
+		System.out.println(action);
 		if (action != null) {
 			switch (action) {
 			case "add":
 				addShoe(request, response, model, colour, size);
-				url = base + "shoe.jsp";
 				break;
-			case "view":
+			case "viewCart":
 				viewCart(request, response);
-				url = base + "shoe.jsp";
-				break;	
-			
+				url = base + "cart.jsp";
+				break;			
+			case "removeShoe":
+				removeShoe(request, response);
+				break;			
 			}
 
 		}
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
+		requestDispatcher.forward(request, response);
+		
+		
 	}
 
 	private void viewCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html;charset=UTF-8");
-	    PrintWriter out = response.getWriter();
 	    Cart cart = (Cart) request.getSession(true).getAttribute("cart");
-		
-        out.println("<table border='1' cellpadding='6'>");
-        out.println("<tr>");
-        out.println("<th>Brand</th>");
-        out.println("<th>Model</th>");
-        out.println("<th>Colour</th>");
-        out.println("<th>Size</th>");
-        out.println("<th>Price</th></tr>");
+	    List<Shoe> shoeList = cart.getAll();
+	    request.setAttribute("shoeList", shoeList);
 	    
-	    
-	    for (Shoe item : cart.getAll()) {
-	    	String model = item.getModel();
-	    	String brand = item.getBrand();
-	    	String colour = item.getColourway();
-	    	float size = item.getSize();
-	    	float price = item.getPrice();
-
-            out.println("<tr>");
-            // output id, author, title, price
-  		   out.println("<td>" + brand + "</td>" + "<td>" + model + "</td>" + "<td>" + colour + "</td>" + "<td>" + size + "</td>"+ "<td>" + "$" + price + "</td></tr>");
-         }
-	    out.println("</table>");
-
 	}
 
 	private void addShoe(HttpServletRequest request, HttpServletResponse response, String model, String colour, String size) throws ServletException, IOException {
@@ -136,8 +120,23 @@ public class CartController extends HttpServlet {
 
 		cart.add(shoe);
 		request.getSession(true).setAttribute("cart", cart);
-		request.getRequestDispatcher("shoes").forward(request, response);
 	}
+	private void removeShoe(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		Cart cart = (Cart) request.getSession(true).getAttribute("cart");
+	    List<Shoe> cartList = cart.getAll();
+	    String[] shoeCheck = request.getParameterValues("shoeCheck");
+	    
+		for(int i = 0; i < shoeCheck.length; i++) {
+			if(shoeCheck[i].equals("on")) {
+				cartList.remove(i);
+			}
+		}
+		cart.setAll(cartList);
+		request.getSession(true).setAttribute("cart", cart);
+	}
+	
+	
 	
 	
 	

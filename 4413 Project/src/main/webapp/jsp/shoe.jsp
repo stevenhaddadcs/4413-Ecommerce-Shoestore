@@ -102,7 +102,7 @@
 					}
 				
 		</script>
-	<a href="${initParam.param2}?action=add"><input type ="submit" value = "Add to Cart"/></a>
+	<input type ="submit" value = "Add to Cart"/>
 	</form>
 </body>
 </html>
