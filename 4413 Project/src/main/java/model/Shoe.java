@@ -79,6 +79,7 @@ public class Shoe {
     public void setStock(int stock) {
         this.stock = stock;
     }
+}
 
 // public void incrementOrderQty(int qty) {
 // orderQty += qty;

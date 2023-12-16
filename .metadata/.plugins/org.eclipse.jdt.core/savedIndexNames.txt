@@ -24,7 +24,6 @@ INDEX VERSION 1.134+D:\github repositories\4413-Group-Project\.metadata\.plugins
 725180040.index
 1086865807.index
 4032593963.index
-121748646.index
 2320578805.index
 1529586023.index
 1865797976.index
