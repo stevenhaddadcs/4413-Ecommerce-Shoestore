@@ -102,6 +102,8 @@ public class CartController extends HttpServlet {
 				CartDAO cartDao = new CartDAOImpl(context);
 				cartDao.checkout(cart, "testUser", "testCC", "testAddress");
 				System.out.println("You have been checked out");
+				Cart newCart = new Cart();
+				request.getSession(true).setAttribute("cart", newCart);
 				break;
 			}
 
