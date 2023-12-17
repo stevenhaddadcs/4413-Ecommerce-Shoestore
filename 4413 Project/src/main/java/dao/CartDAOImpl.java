@@ -51,7 +51,7 @@ public class CartDAOImpl implements CartDAO {
 
             String item_ids = "";
             
-            PreparedStatement stockUpdateStatement = connection.prepareStatement(stockUpdateSQL);
+            PreparedStatement stockUpdateStatement;
             //connection.setAutoCommit(false);
             for (Shoe shoe : cart.getAll()) {
             	stockUpdateSQL = "UPDATE shoestock SET stock = stock - ? WHERE stock_id = ?";
@@ -81,10 +81,13 @@ public class CartDAOImpl implements CartDAO {
             purchaseStatement.setString(4, address);
             purchaseStatement.setString(5, java.time.LocalDate.now().toString());
             purchaseStatement.executeUpdate();
+
+            PreparedStatement test = connection.prepareStatement("SELECT * FROM PURCHASES");
+            ResultSet rs = test.executeQuery();
             
-            purchaseStatement.close();
-            stockUpdateStatement.close();
-            
+            while(rs.next()) {
+            	System.out.println(rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4)+" "+rs.getString(5));
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
