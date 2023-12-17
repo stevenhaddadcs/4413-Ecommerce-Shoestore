@@ -116,12 +116,7 @@ public class AdminDAOImpl implements AdminDAO {
                 float price = resultSet.getFloat("price");
                 float shoe_size = resultSet.getFloat("shoe_size");
                 int stock = resultSet.getInt("stock");
-<<<<<<< Updated upstream
-
-=======
-                
                 //set all values for the shoe
->>>>>>> Stashed changes
                 Shoe shoe = new Shoe(id, model, colourway, brand, price, shoe_size, stock);
                 result.add(shoe);
             }
