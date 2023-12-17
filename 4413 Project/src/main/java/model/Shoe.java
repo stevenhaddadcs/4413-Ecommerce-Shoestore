@@ -16,6 +16,18 @@ public class Shoe {
         orderQty = 0;
     }
 
+    // used by admindaoimpl to get all shoe stocks
+    public Shoe(int id, String model, String colourway, String brand, float price, float shoe_size, int stock) {
+        this.id = id;
+        this.model = model;
+        this.colourway = colourway;
+        this.brand = brand;
+        this.price = price;
+        this.size = shoe_size;
+        this.stock = stock;
+        // orderQty = 0;
+    }
+
     public int getId() {
         return id;
     }
