@@ -15,21 +15,22 @@ import model.Shoe;
 
 public class ShoeDAOImpl implements ShoeDAO {
 	ServletContext sc;
-	
+
 	static {
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException ex) {
 		}
 	}
+
 	public ShoeDAOImpl(ServletContext servletContext) {
 		sc = servletContext;
 	}
-	
+
 	private Connection getConnection() throws SQLException {
 		String path = sc.getRealPath("/dbFile/Shoestore.db");
-		return DriverManager.getConnection("jdbc:sqlite:" + path);  
-		
+		return DriverManager.getConnection("jdbc:sqlite:" + path);
+
 	}
 
 	private void closeConnection(Connection connection) {
@@ -43,7 +44,7 @@ public class ShoeDAOImpl implements ShoeDAO {
 
 	public List<Shoe> findAllShoes() {
 		List<Shoe> result = new ArrayList<Shoe>();
-		
+
 		String sql = "select * from shoetypes";
 
 		Connection connection = null;
@@ -52,16 +53,16 @@ public class ShoeDAOImpl implements ShoeDAO {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				
+
 				Shoe shoe = new Shoe();
-				
+
 				int id = resultSet.getInt("shoe_id");
 				String model = resultSet.getString("model");
 				String colourway = resultSet.getString("colourway");
 				String brand = resultSet.getString("brand");
 				float price = resultSet.getFloat("price");
 				String imageString = resultSet.getString("image_name");
-				
+
 				shoe.setId(id);
 				shoe.setModel(model);
 				shoe.setColourway(colourway);
@@ -69,7 +70,7 @@ public class ShoeDAOImpl implements ShoeDAO {
 				shoe.setPrice(price);
 				shoe.setImageString(imageString);
 				result.add(shoe);
-				
+
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -82,19 +83,20 @@ public class ShoeDAOImpl implements ShoeDAO {
 	@Override
 	public List<Shoe> searchShoesByModel(String m, String c) {
 		List<Shoe> result = new ArrayList<Shoe>();
-		
-		String sql = "select * from shoetypes join shoestock where model = '"+ m + "'and colourway = '"+ c + "' and shoetypes.shoe_id = shoestock.shoe_id";
+
+		String sql = "select * from shoetypes join shoestock where model = '" + m + "'and colourway = '" + c
+				+ "' and shoetypes.shoe_id = shoestock.shoe_id";
 
 		Connection connection = null;
 		try {
 
 			connection = getConnection();
-			PreparedStatement statement =  connection.prepareStatement(sql);
-			ResultSet resultSet =  statement.executeQuery();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				
+
 				Shoe shoe = new Shoe();
-				
+
 				int id = resultSet.getInt("shoe_id");
 				String model = resultSet.getString("model");
 				String colourway = resultSet.getString("colourway");
@@ -102,7 +104,7 @@ public class ShoeDAOImpl implements ShoeDAO {
 				float price = resultSet.getFloat("price");
 				float size = resultSet.getFloat("shoe_size");
 				String imageString = resultSet.getString("image_name");
-				
+
 				shoe.setId(id);
 				shoe.setModel(model);
 				shoe.setColourway(colourway);
@@ -130,11 +132,11 @@ public class ShoeDAOImpl implements ShoeDAO {
 		try {
 			connection = getConnection();
 			PreparedStatement statement = connection.prepareStatement(sql);
-			ResultSet resultSet =  statement.executeQuery();
+			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 
-                String brand = resultSet.getString("brand");
-                
+				String brand = resultSet.getString("brand");
+
 				result.add(brand);
 			}
 		} catch (SQLException ex) {
@@ -147,25 +149,24 @@ public class ShoeDAOImpl implements ShoeDAO {
 
 	public List<Shoe> findShoesByBrand(String brandName) {
 		List<Shoe> result = new ArrayList<Shoe>();
-		 
 
-		String sql = "select * from shoetypes where brand = '"+ brandName + "'";
+		String sql = "select * from shoetypes where brand = '" + brandName + "'";
 		Connection connection = null;
 		try {
 			connection = getConnection();
 			PreparedStatement statement = connection.prepareStatement(sql);
-			ResultSet resultSet =  statement.executeQuery();
+			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				
+
 				Shoe shoe = new Shoe();
-				
+
 				int id = resultSet.getInt("shoe_id");
 				String model = resultSet.getString("model");
 				String colourway = resultSet.getString("colourway");
 				String brand = resultSet.getString("brand");
 				float price = resultSet.getFloat("price");
 				String imageString = resultSet.getString("image_name");
-				
+
 				shoe.setId(id);
 				shoe.setModel(model);
 				shoe.setColourway(colourway);
@@ -181,11 +182,11 @@ public class ShoeDAOImpl implements ShoeDAO {
 		}
 		return result;
 	}
-	
+
 	public List<Shoe> findShoesInSize(String size) {
 		List<Shoe> result = new ArrayList<Shoe>();
-		 
-		//find only models that are available in a certain size
+
+		// find only models that are available in a certain size
 		String sql = "SELECT SHOESTOCK.stock_id, SHOESTOCK.shoe_id, SHOESTOCK.shoe_size, SHOESTOCK.stock,\r\n"
 				+ "       SHOETYPES.MODEL, SHOETYPES.COLOURWAY, SHOETYPES.BRAND, SHOETYPES.PRICE, SHOETYPES.IMAGE_NAME\r\n"
 				+ "FROM SHOESTOCK\r\n"
@@ -196,11 +197,11 @@ public class ShoeDAOImpl implements ShoeDAO {
 			connection = getConnection();
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setString(1, size);
-			ResultSet resultSet =  statement.executeQuery();
+			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				
+
 				Shoe shoe = new Shoe();
-				
+
 				int id = resultSet.getInt("shoe_id");
 				String model = resultSet.getString("model");
 				String colourway = resultSet.getString("colourway");
@@ -208,7 +209,7 @@ public class ShoeDAOImpl implements ShoeDAO {
 				float price = resultSet.getFloat("price");
 				String imageString = resultSet.getString("image_name");
 				int stock = resultSet.getInt("stock");
-				
+
 				shoe.setId(id);
 				shoe.setModel(model);
 				shoe.setColourway(colourway);
@@ -224,10 +225,9 @@ public class ShoeDAOImpl implements ShoeDAO {
 			closeConnection(connection);
 		}
 		return result;
-	
+
 	}
-	
-	
+
 	public void insert(Shoe shoe) {
 		Connection connection = null;
 		try {
@@ -248,45 +248,45 @@ public class ShoeDAOImpl implements ShoeDAO {
 		}
 	}
 
-	
-	public void delete(int id) {
-		Connection connection = null;
+	// USE ADMIN DAO DELETE SHOE INSTEAD
+	// public void delete(int id) {
+	// Connection connection = null;
 
+	// try {
+	// connection = getConnection();
+	// PreparedStatement statement = connection
+	// .prepareStatement("delete from shoetypes where shoe_id=?");
+	// statement.setInt(1, id);
+	// statement.execute();
+	// } catch (SQLException ex) {
+	// ex.printStackTrace();
+	// } finally {
+	// closeConnection(connection);
+	// }
+	// }
+
+	public int getShoeStocks(String stockId) {
+		int stock = 0;
+		String sql = "select stock from shoestock where stock_id = '" + stockId + "'";
+		Connection connection = null;
 		try {
 			connection = getConnection();
-			PreparedStatement statement = connection
-					.prepareStatement("delete from shoetypes where shoe_id=?");
-			statement.setInt(1, id);
-			statement.execute();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				stock = resultSet.getInt("stock");
+			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
 			closeConnection(connection);
 		}
+		return stock;
 	}
-	
-    public int getShoeStocks(String stockId) {
-        int stock = 0;
-        String sql = "select stock from shoestock where stock_id = '" + stockId + "'";
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()) {
-                stock = resultSet.getInt("stock");
-            }
-        } catch(SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            closeConnection(connection);
-        }
-        return stock;
-    }
 
 	public List<Shoe> searchShoesByKeyword(String keyWord) {
 		List<Shoe> result = new ArrayList<Shoe>();
-		
+
 		String sql = "select * from shoetypes "
 				+ " where model like '%"
 				+ keyWord.trim()
@@ -302,25 +302,25 @@ public class ShoeDAOImpl implements ShoeDAO {
 			connection = getConnection();
 			PreparedStatement statement = connection.prepareStatement(sql);
 			ResultSet resultSet = statement.executeQuery();
-			while(resultSet.next()) {
+			while (resultSet.next()) {
 				Shoe shoe = new Shoe();
-				
+
 				int id = resultSet.getInt("shoe_id");
 				String model = resultSet.getString("model");
 				String colourway = resultSet.getString("colourway");
 				String brand = resultSet.getString("brand");
 				float price = resultSet.getFloat("price");
 				String imageString = resultSet.getString("image_name");
-				//int stock = resultSet.getInt("stock");
-				
+				// int stock = resultSet.getInt("stock");
+
 				shoe.setId(id);
 				shoe.setModel(model);
 				shoe.setColourway(colourway);
 				shoe.setBrand(brand);
 				shoe.setPrice(price);
 				shoe.setImageString(imageString);
-				//show stock in the display
-				//shoe.setStock(stock);
+				// show stock in the display
+				// shoe.setStock(stock);
 				result.add(shoe);
 			}
 		} catch (SQLException ex) {
@@ -331,22 +331,23 @@ public class ShoeDAOImpl implements ShoeDAO {
 
 		return result;
 	}
-	
+
 	public Shoe searchShoesByMCS(String m, String c, String s) {
-		
+
 		Shoe result = new Shoe();
-		String sql = "select * from shoetypes join shoestock where model = '"+ m + "'and colourway = '"+ c + "' and shoetypes.shoe_id = shoestock.shoe_id and shoestock.shoe_size ='"+s+"'";
+		String sql = "select * from shoetypes join shoestock where model = '" + m + "'and colourway = '" + c
+				+ "' and shoetypes.shoe_id = shoestock.shoe_id and shoestock.shoe_size ='" + s + "'";
 
 		Connection connection = null;
 		try {
 
 			connection = getConnection();
-			PreparedStatement statement =  connection.prepareStatement(sql);
-			ResultSet resultSet =  statement.executeQuery();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				
+
 				Shoe shoe = new Shoe();
-				
+
 				int id = resultSet.getInt("shoe_id");
 				String model = resultSet.getString("model");
 				String colourway = resultSet.getString("colourway");
@@ -354,7 +355,7 @@ public class ShoeDAOImpl implements ShoeDAO {
 				float price = resultSet.getFloat("price");
 				float size = resultSet.getFloat("shoe_size");
 				String imageString = resultSet.getString("image_name");
-				
+
 				shoe.setId(id);
 				shoe.setModel(model);
 				shoe.setColourway(colourway);
@@ -369,9 +370,8 @@ public class ShoeDAOImpl implements ShoeDAO {
 		} finally {
 			closeConnection(connection);
 		}
-		
+
 		return result;
 	}
-
 
 }
