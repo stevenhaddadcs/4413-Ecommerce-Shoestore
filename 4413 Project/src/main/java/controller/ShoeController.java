@@ -11,9 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.ShoeDAO;
 import dao.ShoeDAOImpl;
+import model.Cart;
 import model.Shoe;
 
 
@@ -34,7 +36,7 @@ public class ShoeController extends HttpServlet {
 		// calling DAO method to retrieve category List from Database, for left column display
 		List<String> brandList =  shoeDAO.findAllBrands();
 		context.setAttribute("brandList", brandList);
-
+		
 	}
 
 	protected void doGet(HttpServletRequest request,
@@ -45,6 +47,17 @@ public class ShoeController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession(true);
+		String loginStatus;
+		synchronized (session) {
+			loginStatus = (String) session.getAttribute("loginStatus");
+			if(loginStatus == null) {
+				request.getSession(true).setAttribute("loginStatus", "false");	
+			}
+			
+		}
+		
 		String base = "/jsp/";
 		String url = base + "home.jsp";
 		String action = request.getParameter("action");
