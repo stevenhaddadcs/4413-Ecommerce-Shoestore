@@ -28,7 +28,7 @@
 	<input type = "text" style="width: 200px;" name="username" id="username"/>
     <br><br>
     <span style="margin-left: 15px"> Password: </span>
-    <input type = "text" style="width: 200px; margin-left: 3px" name="password" id="password"/>
+    <input type = "password" style="width: 200px; margin-left: 3px" name="password" id="password"/>
     <br><br><br>
     <input type ="submit" style="margin-left: 15px" value = "Login"/>
 	

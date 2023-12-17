@@ -21,6 +21,9 @@ import dao.CartDAO;
 import dao.CartDAOImpl;
 import model.Shoe;
 import model.Cart;
+import model.User;
+import dao.LoginDAO;
+import dao.LoginDAOImpl;
 /**
  * Servlet implementation class CartServlet
  */
@@ -61,7 +64,7 @@ public class LoginController extends HttpServlet {
 		String base = "/jsp/";
 		String url = base + "home.jsp";
 		String action = request.getParameter("action");
-		String name = request.getParameter("name");
+		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
 		if (action != null) {
@@ -70,9 +73,9 @@ public class LoginController extends HttpServlet {
 				url = base + "Login.jsp";
 				break;
 			case "login":
-				boolean loggedIn = login(request, response, name, password);
-				
-				if(loggedIn) {
+				LoginDAO check = new LoginDAOImpl(context);
+				boolean validLogin = check.isValid(username, password);
+				if(validLogin) {
 					request.getSession(true).setAttribute("loginStatus", "true");
 				}else {
 					request.setAttribute("loginFail", "true");
@@ -92,14 +95,6 @@ public class LoginController extends HttpServlet {
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
 		requestDispatcher.forward(request, response);
 		
-		
-	}
-
-	private boolean login(HttpServletRequest request, HttpServletResponse response, String name, String password) {
-		
-		
-		
-		return false;
 	}
 	
 }

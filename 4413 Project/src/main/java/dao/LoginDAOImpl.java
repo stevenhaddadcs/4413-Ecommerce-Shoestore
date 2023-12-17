@@ -41,7 +41,33 @@ public class LoginDAOImpl implements LoginDAO {
         }
     }
 
+	public boolean isValid(String user, String pass) {
+		int count = 0;
+		boolean valid = false;
+		String sql = "select * from users where username='"+ user +"' and password='" + pass + "'";
 
+		Connection connection = null;
+		try {
+			connection = getConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				count++;
+				System.out.println(resultSet.getString(1));
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			closeConnection(connection);
+		}
+		if (count > 0) {
+			valid = true;
+		}
+		return valid;
+	}
+    
+    
+    
 
     // get
 }
