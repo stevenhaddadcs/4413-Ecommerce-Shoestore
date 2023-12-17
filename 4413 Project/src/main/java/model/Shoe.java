@@ -10,10 +10,10 @@ public class Shoe {
     private float size;
     private String imageString;
     private int stock;
-    // private int orderQty;
+    private int orderQty;
 
     public Shoe() {
-        // orderQty = 0;
+        orderQty = 0;
     }
 
     public int getId() {
@@ -79,17 +79,16 @@ public class Shoe {
     public void setStock(int stock) {
         this.stock = stock;
     }
+
+    public void incrementOrderQty(int qty) {
+    	orderQty += qty;
+    }
+
+    public void setOrderQty(int orderQty) {
+    	this.orderQty = orderQty;
+    }
+
+    public int getOrderQty() {
+    	return orderQty;
+    }
 }
-
-// public void incrementOrderQty(int qty) {
-// orderQty += qty;
-// }
-
-// public void setOrderQty(int orderQty) {
-// this.orderQty = orderQty;
-// }
-
-// public int getOrderQty() {
-// return 0;
-// }
-// }

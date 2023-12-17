@@ -13,7 +13,7 @@
 <body>
  	<jsp:include page="header.jsp" flush="true" />
  	<jsp:include page="leftColumn.jsp" flush="true" />
- 	<form method = "get" action = "CartController">
+ 	<form method = "post" action = "CartController">
     <div>
        
          <span class="label" style="margin-left: 15px;"> Cart
@@ -29,7 +29,6 @@
                 <th id="th-colour">Colour</th>
                 <th id="th-size">Size</th>
                 <th id="th-price">Price</th>
-                <th id="th-remove">Remove from Cart</th>
             </tr>
         </thead>
          <c:forEach items="${requestScope.shoeList}" var="e">
@@ -39,19 +38,23 @@
              <td> ${e.colourway} </td>
              <td> ${e.size} </td>
              <td> ${e.price} </td>
-             <td><input type = "checkbox" name="shoeCheck" value="${e.model},${e.colourway},${e.size}"/></td>
             </tr>
             </c:forEach>
             <tr>
-            <td><input type = "hidden" name = "action" value = "removeShoe"/>
-			<input type ="submit" value = "Remove Checked from Cart"/></td>
+            <td> <c:if test="${requestScope.userccard == null}" >
+            	<input type = "text" id="ccard" name="ccard"/>
+            </c:if>
+            </td>
+			<td> <c:if test="${requestScope.useraddress == null}" >
+           		<input type = "text" id="address" name="address"/>
+            </c:if>
+			</td>
 			<td></td>
 			<td></td>
-			<td></td>
-			<td></td>
-			<td><a href="${initParam.param2}?action=checkout"><button type ="button">Checkout</button></a></td>
+			<td><input type ="submit" value = "Checkout"/></td>
             </tr>
 	</table>
+	<input type = "hidden" name = "action" value = "checkedout"/>
 	</form>
 </body>
 </html>

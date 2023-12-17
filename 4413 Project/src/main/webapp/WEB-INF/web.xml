@@ -11,6 +11,11 @@
 		<param-value>CartController</param-value>
 	</context-param>
 	
+		<context-param>
+		<param-name>param3</param-name>
+		<param-value>LoginController</param-value>
+	</context-param>
+	
 	<context-param>
 		<param-name>imageURL</param-name>
 		<param-value>images</param-value>

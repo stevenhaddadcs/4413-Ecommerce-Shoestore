@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 
 import dao.ShoeDAO;
 import dao.ShoeDAOImpl;
+import dao.CartDAO;
+import dao.CartDAOImpl;
 import model.Shoe;
 import model.Cart;
 /**
@@ -86,8 +88,21 @@ public class CartController extends HttpServlet {
 				removeShoe(request, response);
 				break;			
 			case "checkout":
+				String loginStatus = (String) request.getSession(true).getAttribute("loginStatus");
+				if(loginStatus.equals("true")) {
+					url = base + "checkout.jsp"; //placeholder for checking out if logged in
+				}else {
+					url = base + "Login.jsp"; //placeholder for logging in/registering if not logged in.
+				}
+				viewCart(request, response);
 				url = base + "checkout.jsp";
-				break;		
+				break;
+			case "checkedout":
+				cart = (Cart) request.getSession(true).getAttribute("cart");
+				CartDAO cartDao = new CartDAOImpl(context);
+				cartDao.checkout(cart, "testUser", "testCC", "testAddress");
+				System.out.println("You have been checked out");
+				break;
 			}
 
 		}
@@ -128,12 +143,17 @@ public class CartController extends HttpServlet {
 		// TODO Auto-generated method stub
 		Cart cart = (Cart) request.getSession(true).getAttribute("cart");
 	    List<Shoe> cartList = cart.getAll();
+	    System.out.println(cartList);
 	    String[] shoeCheck = request.getParameterValues("shoeCheck");
+	    System.out.println(shoeCheck);
 	    if(shoeCheck != null) {
 			for(int i = 0; i < shoeCheck.length; i++) {
-				if(shoeCheck[i].equals("on")) {
-					cartList.remove(i);
-				}
+				for(int j = 0; j < cartList.size(); j++) {
+					String temp = cartList.get(j).getModel()+","+cartList.get(j).getColourway()+","+cartList.get(j).getSize();
+					if(shoeCheck[i].equals(temp)) {
+						cartList.remove(j);
+					}
+				}	
 			}
 			cart.setAll(cartList);
 			request.getSession(true).setAttribute("cart", cart);
