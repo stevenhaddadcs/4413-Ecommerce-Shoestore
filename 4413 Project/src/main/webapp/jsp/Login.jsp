@@ -23,6 +23,10 @@
     <br>
     <span style="margin-left: 15px; font-size:30px"> INVALID USERNAME OR PASSWORD </span>
     </c:if>
+    <c:if test="${requestScope.notLogged == 'true'}">
+    <br>
+    <span style="margin-left: 15px; font-size:30px"> NOT LOGGED IN. </span>
+    </c:if>
     <br><br>
 	<span style="margin-left: 15px"> Username: </span>
 	<input type = "text" style="width: 200px;" name="username" id="username"/>

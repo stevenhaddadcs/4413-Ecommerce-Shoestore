@@ -66,7 +66,9 @@ public class LoginController extends HttpServlet {
 		String action = request.getParameter("action");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-
+		String usernameReg = request.getParameter("usernameReg");
+		String passwordReg = request.getParameter("passwordReg");
+		
 		if (action != null) {
 			switch (action) {
 			case "loginRegister":
@@ -77,13 +79,33 @@ public class LoginController extends HttpServlet {
 				boolean validLogin = check.isValid(username, password);
 				if(validLogin) {
 					request.getSession(true).setAttribute("loginStatus", "true");
+					User user = new User();
+					user.setUsername(username);
+					user.setPassword(password);
+					request.getSession(true).setAttribute("user", user);
 				}else {
 					request.setAttribute("loginFail", "true");
 					url = base + "Login.jsp";
 				}
 				break;
 			case "register":
-				
+				url = base + "register.jsp";
+				break;
+			case "registerSubmit":
+				check = new LoginDAOImpl(context);
+				boolean available = check.userAvailable(usernameReg);
+				if(available && usernameReg != "" && passwordReg != "") {
+					check.register(usernameReg,passwordReg);
+				}else if(usernameReg == "") {
+					request.setAttribute("nameEmpty", "true");
+					url = base + "register.jsp";
+				}else if(passwordReg == "") {
+					request.setAttribute("passwordEmpty", "true");
+					url = base + "register.jsp";
+				}else {
+					request.setAttribute("nameTaken", "true");
+					url = base + "register.jsp";
+				}
 				break;
 			case "logout":
 				request.getSession(true).setAttribute("loginStatus", "false");

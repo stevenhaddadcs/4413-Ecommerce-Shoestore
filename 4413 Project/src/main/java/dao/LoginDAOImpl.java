@@ -55,6 +55,7 @@ public class LoginDAOImpl implements LoginDAO {
 				count++;
 				System.out.println(resultSet.getString(1));
 			}
+			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -65,7 +66,51 @@ public class LoginDAOImpl implements LoginDAO {
 		}
 		return valid;
 	}
+	
+	public boolean userAvailable(String user) {
+		int count = 0;
+		boolean valid = false;
+		String sql = "select * from users where username='"+ user + "'";
 
+		Connection connection = null;
+		try {
+			connection = getConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				count++;
+				System.out.println(resultSet.getString(1));
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			closeConnection(connection);
+		}
+		if (count <= 0) {
+			valid = true;
+		}
+		return valid;
+	}
+
+	@Override
+	public void register(String user, String pass) {
+		Connection connection = null;
+		try {
+			connection = getConnection();
+	        String purchaseString = "INSERT INTO USERS (username, password) VALUES (?, ?)";
+	        PreparedStatement purchaseStatement = connection.prepareStatement(purchaseString);
+	        purchaseStatement.setString(1, user);
+	        purchaseStatement.setString(2, pass);
+	        purchaseStatement.executeUpdate();
+	        
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+            closeConnection(connection);
+        }
+		
+	}
 	//check if the user is an admin
 	@Override
 	public boolean isAdmin(String user) {
