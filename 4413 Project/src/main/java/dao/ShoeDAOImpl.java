@@ -355,7 +355,6 @@ public class ShoeDAOImpl implements ShoeDAO {
 				float price = resultSet.getFloat("price");
 				float size = resultSet.getFloat("shoe_size");
 				String imageString = resultSet.getString("image_name");
-				int stock = resultSet.getInt("stock");
 
 				shoe.setId(id);
 				shoe.setModel(model);
@@ -364,8 +363,6 @@ public class ShoeDAOImpl implements ShoeDAO {
 				shoe.setPrice(price);
 				shoe.setSize(size);
 				shoe.setImageString(imageString);
-				shoe.setStock(stock);
-						
 				return shoe;
 			}
 		} catch (SQLException ex) {

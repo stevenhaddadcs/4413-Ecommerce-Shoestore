@@ -53,7 +53,7 @@ public class ShoeController extends HttpServlet {
 		synchronized (session) {
 			loginStatus = (String) session.getAttribute("loginStatus");
 			if(loginStatus == null) {
-				request.getSession(true).setAttribute("loginStatus", "false");
+				request.getSession(true).setAttribute("loginStatus", "false");	
 			}
 			
 		}

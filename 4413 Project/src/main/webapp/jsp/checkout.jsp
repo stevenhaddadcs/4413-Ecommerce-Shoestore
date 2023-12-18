@@ -16,19 +16,10 @@
  	<form method = "post" action = "CartController">
     <div>
        
-         <span class="label" style="margin-left: 15px;"> Checkout
+         <span class="label" style="margin-left: 15px;"> Cart
          </span>
        
     </div>
-    <input type = "hidden" name = "action" value = "checkedout"/>
-    <c:if test="${requestScope.noCC == 'true'}">
-    <br>
-    <span style="margin-left: 15px; font-size:30px"> PLEASE ENTER A CREDIT CARD </span>
-    </c:if>
-    <c:if test="${requestScope.noAddress == 'true'}">
-    <br>
-    <span style="margin-left: 15px; font-size:30px"> PLEASE ENTER AN ADDRESS </span>
-    </c:if>
     
 	<table>
 	     <thead>
@@ -50,14 +41,12 @@
             </tr>
             </c:forEach>
             <tr>
-            <td> <c:if test="${requestScope.user.cc_number == null}" >
-            	<span style="margin-left: 15px"> Credit Card: </span>
-            	<input type = "text" id="ccard" name="ccard" value="${requestScope.ccard}"/>
+            <td> <c:if test="${requestScope.userccard == null}" >
+            	<input type = "text" id="ccard" name="ccard"/>
             </c:if>
             </td>
-			<td> <c:if test="${requestScope.user.address == null}" >
-				<span style="margin-left: 15px"> Address: </span>
-           		<input type = "text" id="address" name="address" value="${requestScope.address}"/>
+			<td> <c:if test="${requestScope.useraddress == null}" >
+           		<input type = "text" id="address" name="address"/>
             </c:if>
 			</td>
 			<td></td>
@@ -65,6 +54,7 @@
 			<td><input type ="submit" value = "Checkout"/></td>
             </tr>
 	</table>
+	<input type = "hidden" name = "action" value = "checkedout"/>
 	</form>
 </body>
 </html>
