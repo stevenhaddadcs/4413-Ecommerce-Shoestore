@@ -9,8 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.*;
-
 import javax.servlet.ServletContext;
+
+
 
 public class AdminDAOImpl implements AdminDAO {
     ServletContext sc;
@@ -139,15 +140,14 @@ public class AdminDAOImpl implements AdminDAO {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
 
-                int id = resultSet.getInt("shoe_id");
-                String model = resultSet.getString("model");
-                String colourway = resultSet.getString("colourway");
-                String brand = resultSet.getString("brand");
-                float price = resultSet.getFloat("price");
-                float shoe_size = resultSet.getFloat("shoe_size");
+                String stock_id = resultSet.getString("stock_id");
+                String model = resultSet.getString("MODEL");
+                String colourway = resultSet.getString("COLOURWAY");
+                String brand = resultSet.getString("BRAND");
+                float shoe_size = Float.parseFloat(resultSet.getString("shoe_size"));
                 int stock = resultSet.getInt("stock");
                 // set all values for the shoe
-                Shoe shoe = new Shoe(id, model, colourway, brand, price, shoe_size, stock);
+                Shoe shoe = new Shoe(stock_id, model, colourway, brand, shoe_size, stock);
                 result.add(shoe);
             }
         } catch (SQLException ex) {
@@ -163,7 +163,7 @@ public class AdminDAOImpl implements AdminDAO {
     @Override
     public ArrayList<Shoe> getAllShoeTypes() {
         ArrayList<Shoe> result = new ArrayList<Shoe>();
-        String sql = "SELECT shoe_id, MODEL, COLOURWAY, BRAND, PRICE from SHOETYPES";
+        String sql = "SELECT SHOE_ID, MODEL, COLOURWAY, BRAND, PRICE from SHOETYPES";
 
         Connection connection = null;
         try {
@@ -172,11 +172,11 @@ public class AdminDAOImpl implements AdminDAO {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
 
-                int id = resultSet.getInt("shoe_id");
-                String model = resultSet.getString("model");
-                String colourway = resultSet.getString("colourway");
-                String brand = resultSet.getString("brand");
-                float price = resultSet.getFloat("price");
+                int id = resultSet.getInt("SHOE_ID");
+                String model = resultSet.getString("MODEL");
+                String colourway = resultSet.getString("COLOURWAY");
+                String brand = resultSet.getString("BRAND");
+                float price = resultSet.getFloat("PRICE");
                 // set all values for the shoe
                 Shoe shoe = new Shoe(id, model, colourway, brand, price);
                 result.add(shoe);
