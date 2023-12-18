@@ -66,59 +66,9 @@ public class ProfileController extends HttpServlet {
 		String action = request.getParameter("action");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		String usernameReg = request.getParameter("usernameReg");
-		String passwordReg = request.getParameter("passwordReg");
+
 		
-		if (action != null) {
-			switch (action) {
-			case "loginRegister":
-				url = base + "Login.jsp";
-				break;
-			case "login":
-				LoginDAO check = new LoginDAOImpl(context);
-				boolean validLogin = check.isValid(username, password);
-				if(validLogin) {
-					request.getSession(true).setAttribute("loginStatus", "true");
-					User user = new User();
-					user.setUsername(username);
-					user.setPassword(password);
-					request.getSession(true).setAttribute("user", user);
-				}else {
-					request.setAttribute("loginFail", "true");
-					url = base + "Login.jsp";
-				}
-				break;
-			case "register":
-				url = base + "register.jsp";
-				break;
-			case "registerSubmit":
-				check = new LoginDAOImpl(context);
-				boolean available = check.userAvailable(usernameReg);
-				if(available && usernameReg != "" && passwordReg != "") {
-					check.register(usernameReg,passwordReg);
-					request.getSession(true).setAttribute("loginStatus", "true");
-					User user = new User();
-					user.setUsername(usernameReg);
-					user.setPassword(passwordReg);
-					request.getSession(true).setAttribute("user", user);
-				}else if(usernameReg == "") {
-					request.setAttribute("nameEmpty", "true");
-					url = base + "register.jsp";
-				}else if(passwordReg == "") {
-					request.setAttribute("passwordEmpty", "true");
-					url = base + "register.jsp";
-				}else {
-					request.setAttribute("nameTaken", "true");
-					url = base + "register.jsp";
-				}
-				break;
-			case "logout":
-				request.getSession(true).setAttribute("loginStatus", "false");
-				break;
-			case "profile":
-				url = base + "profile.jsp";
-				break;	
-			}
+
 			
 			
 			
@@ -132,7 +82,7 @@ public class ProfileController extends HttpServlet {
 			
 			
 
-		}
+		
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
 		requestDispatcher.forward(request, response);

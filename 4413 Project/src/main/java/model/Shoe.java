@@ -28,6 +28,14 @@ public class Shoe {
         // orderQty = 0;
     }
 
+    public Shoe(int id, String model, String colourway, String brand, float price) {
+        this.id = id;
+        this.model = model;
+        this.colourway = colourway;
+        this.brand = brand;
+        this.price = price;
+    }
+
     public int getId() {
         return id;
     }
@@ -93,14 +101,14 @@ public class Shoe {
     }
 
     public void incrementOrderQty(int qty) {
-    	orderQty += qty;
+        orderQty += qty;
     }
 
     public void setOrderQty(int orderQty) {
-    	this.orderQty = orderQty;
+        this.orderQty = orderQty;
     }
 
     public int getOrderQty() {
-    	return orderQty;
+        return orderQty;
     }
 }

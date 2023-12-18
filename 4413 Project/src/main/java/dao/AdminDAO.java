@@ -12,6 +12,8 @@ public interface AdminDAO {
     public void deleteShoe(int shoe_id);
 
     public ArrayList<Shoe> getAllShoeStocks();
+    
+    public ArrayList<Shoe> getAllShoeTypes();
 
     public void updateShoeStock(String stock_id, int stock);
 

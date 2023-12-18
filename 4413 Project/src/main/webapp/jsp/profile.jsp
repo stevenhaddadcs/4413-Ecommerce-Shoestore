@@ -23,7 +23,7 @@
     
     
     
-    <c:if test="${requestScope.loginFail == 'true'}">
+    <c:if test="${requestScope.user.address == null}">
     <br>
     <span style="margin-left: 15px; font-size:30px"> INVALID USERNAME OR PASSWORD </span>
     </c:if>

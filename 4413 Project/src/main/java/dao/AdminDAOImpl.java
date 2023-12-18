@@ -116,8 +116,39 @@ public class AdminDAOImpl implements AdminDAO {
                 float price = resultSet.getFloat("price");
                 float shoe_size = resultSet.getFloat("shoe_size");
                 int stock = resultSet.getInt("stock");
-                //set all values for the shoe
+                // set all values for the shoe
                 Shoe shoe = new Shoe(id, model, colourway, brand, price, shoe_size, stock);
+                result.add(shoe);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+        return result;
+
+    }
+
+    // get all shoe stocks from database SHOESTOCK
+    @Override
+    public ArrayList<Shoe> getAllShoeTypes() {
+        ArrayList<Shoe> result = new ArrayList<Shoe>();
+        String sql = "SELECT shoe_id, MODEL, COLOURWAY, BRAND, PRICE from SHOETYPES";
+
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+
+                int id = resultSet.getInt("shoe_id");
+                String model = resultSet.getString("model");
+                String colourway = resultSet.getString("colourway");
+                String brand = resultSet.getString("brand");
+                float price = resultSet.getFloat("price");
+                // set all values for the shoe
+                Shoe shoe = new Shoe(id, model, colourway, brand, price);
                 result.add(shoe);
             }
         } catch (SQLException ex) {

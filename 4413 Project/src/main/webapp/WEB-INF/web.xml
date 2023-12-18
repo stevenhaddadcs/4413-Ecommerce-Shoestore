@@ -18,8 +18,15 @@
 	
 	<context-param>
 		<param-name>param4</param-name>
+		<param-value>admin</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>param5</param-name>
 		<param-value>ProfileController</param-value>
 	</context-param>
+	
+
 	
 	<context-param>
 		<param-name>imageURL</param-name>
