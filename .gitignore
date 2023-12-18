@@ -1,1 +1,10 @@
 /.metadata/
+*.index
+*.xmi
+*.index
+*.properties
+*.txt
+*.ini
+*.log
+*.prefs
+*.xml
