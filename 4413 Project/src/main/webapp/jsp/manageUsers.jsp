@@ -38,12 +38,12 @@
 							<tr>
 								<td>${user.username}</td>
 								<td>
-									<c:if test="${user.isAdmin eq 1}">
-										Admin
-									</c:if>
-									<c:if test="${user.isAdmin ne 1}">
-										Customer
-									</c:if>
+									<form action="admin" method="post">
+										<input type="checkbox" name="isAdmin" ${user.isAdmin eq 1 ? 'checked' : '' } />
+										<input type="hidden" name="action" value="updateAdminStatus" />
+										<input type="hidden" name="username" value="${user.username}" />
+										<input type="submit" value="Update" />
+									</form>
 								</td>
 								<td>${user.address}</td>
 								<td>${user.cc_number}</td>

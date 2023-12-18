@@ -11,8 +11,6 @@ import java.util.List;
 import model.*;
 import javax.servlet.ServletContext;
 
-
-
 public class AdminDAOImpl implements AdminDAO {
     ServletContext sc;
 
@@ -39,6 +37,32 @@ public class AdminDAOImpl implements AdminDAO {
         try {
             connection.close();
         } catch (SQLException ex) {
+        }
+    }
+
+    // update admin status in database USERS
+    @Override
+    public void updateAdminStatus(String username, int isAdmin) {
+        String sql = "UPDATE USERS SET is_admin = ? WHERE username = ?";
+
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, isAdmin);
+            statement.setString(2, username);
+
+            int rowsAffected = statement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Admin status updated successfully.");
+            } else {
+                System.out.println("No rows were affected. Admin status update failed.");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
         }
     }
 

@@ -66,13 +66,22 @@ public class AdminController extends HttpServlet {
                     break;
 
                 // Action cases for updating and deleting
-                case "deleteUser":
+                case "updateAdminStatus":
                     String username = request.getParameter("username");
-                    System.out.println(username);
-                    adminDAO.deleteUser(username);
+                    int isAdmin = request.getParameter("isAdmin") != null ? 1 : 0;
+                    adminDAO.updateAdminStatus(username, isAdmin);
                     // Call the DAO method to get all users
                     ArrayList<User> users1 = adminDAO.getAllUsers();
                     request.setAttribute("users", users1);
+                    url = base + "manageUsers.jsp";
+                    break;
+                case "deleteUser":
+                    String username1 = request.getParameter("username");
+                    System.out.println(username1);
+                    adminDAO.deleteUser(username1);
+                    // Call the DAO method to get all users
+                    ArrayList<User> users2 = adminDAO.getAllUsers();
+                    request.setAttribute("users", users2);
                     url = base + "manageUsers.jsp";
                     break;
                 case "deleteShoe":

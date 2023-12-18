@@ -7,6 +7,8 @@ import model.*;
 
 public interface AdminDAO {
 
+    public void updateAdminStatus(String username, int isAdmin);
+
     public ArrayList<User> getAllUsers();
 
     public void deleteUser(String username);
