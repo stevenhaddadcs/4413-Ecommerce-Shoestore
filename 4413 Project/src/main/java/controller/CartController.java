@@ -20,6 +20,7 @@ import dao.ShoeDAOImpl;
 import dao.CartDAO;
 import dao.CartDAOImpl;
 import model.Shoe;
+import model.User;
 import model.Cart;
 /**
  * Servlet implementation class CartServlet
@@ -74,6 +75,8 @@ public class CartController extends HttpServlet {
 		String model = request.getParameter("model");
 		String colour = request.getParameter("colour");
 		String size = request.getParameter("sizeSelect");
+		String ccard = request.getParameter("ccard");
+		String address = request.getParameter("address");
 
 		if (action != null) {
 			switch (action) {
@@ -92,18 +95,41 @@ public class CartController extends HttpServlet {
 				if(loginStatus.equals("true")) {
 					url = base + "checkout.jsp"; //placeholder for checking out if logged in
 				}else {
+					request.setAttribute("notLogged", "true");
 					url = base + "Login.jsp"; //placeholder for logging in/registering if not logged in.
 				}
 				viewCart(request, response);
-				url = base + "checkout.jsp";
 				break;
 			case "checkedout":
 				cart = (Cart) request.getSession(true).getAttribute("cart");
 				CartDAO cartDao = new CartDAOImpl(context);
-				cartDao.checkout(cart, "testUser", "testCC", "testAddress");
-				System.out.println("You have been checked out");
-				Cart newCart = new Cart();
-				request.getSession(true).setAttribute("cart", newCart);
+				User user = (User) request.getSession(true).getAttribute("user");		
+				
+				if(ccard != "") {
+					request.setAttribute("ccard", ccard);
+				}
+				if(address != "") {
+					request.setAttribute("address", address);
+				}
+				
+				
+				if(ccard != "" && address != "") {
+					user.setAddress(address);
+					request.getSession(true).setAttribute("user",user);
+					
+					cartDao.checkout(cart, user.getUsername(), user.getPassword(), user.getAddress());
+					System.out.println("You have been checked out");
+					Cart newCart = new Cart();
+					request.getSession(true).setAttribute("cart", newCart);
+				}else if(ccard == "") {
+					request.setAttribute("noCC", "true");
+					viewCart(request, response);
+					url = base + "checkout.jsp";
+				}else if(address == "") {
+					request.setAttribute("noAddress", "true");
+					viewCart(request, response);
+					url = base + "checkout.jsp";
+				}
 				break;
 			}
 
@@ -137,17 +163,18 @@ public class CartController extends HttpServlet {
 		}else {
 			shoe = shoeDao.searchShoesByMCS(model, colour,"" +temp);
 		}
+		
+		if(shoe.getStock() > 0) {
+			cart.add(shoe);
+		}
 
-		cart.add(shoe);
 		request.getSession(true).setAttribute("cart", cart);
 	}
 	private void removeShoe(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Cart cart = (Cart) request.getSession(true).getAttribute("cart");
 	    List<Shoe> cartList = cart.getAll();
-	    System.out.println(cartList);
 	    String[] shoeCheck = request.getParameterValues("shoeCheck");
-	    System.out.println(shoeCheck);
 	    if(shoeCheck != null) {
 			for(int i = 0; i < shoeCheck.length; i++) {
 				for(int j = 0; j < cartList.size(); j++) {
