@@ -42,9 +42,17 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
         String base = "/jsp/";
         String url = base + "adminHome.jsp"; // home page for admin
+        String notAdminPage = base + "notAdmin.jsp";
         String action = request.getParameter("action");
 
-        if (action != null) {
+        HttpSession session = request.getSession();
+        // if not null and is admin == true
+        boolean adminCheck = session.getAttribute("adminStatus") != null && (boolean) session.getAttribute("adminStatus");
+
+        if (!adminCheck) {
+            // Redirect or take appropriate action for non-admin users
+        	url = notAdminPage;
+        } else if (action != null) {
             switch (action) {
                 case "manageUsers":
                     // Call the DAO method to get all users
