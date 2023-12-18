@@ -13,38 +13,38 @@ import model.*;
 import javax.servlet.ServletContext;
 
 public class LoginDAOImpl implements LoginDAO {
-    ServletContext sc;
+	ServletContext sc;
 
-    static {
-        try {
-            Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException ex) {
-        }
-    }
+	static {
+		try {
+			Class.forName("org.sqlite.JDBC");
+		} catch (ClassNotFoundException ex) {
+		}
+	}
 
-    public LoginDAOImpl(ServletContext servletContext) {
-        sc = servletContext;
-    }
+	public LoginDAOImpl(ServletContext servletContext) {
+		sc = servletContext;
+	}
 
-    private Connection getConnection() throws SQLException {
-        String path = sc.getRealPath("/dbFile/Shoestore.db");
-        return DriverManager.getConnection("jdbc:sqlite:" + path);
+	private Connection getConnection() throws SQLException {
+		String path = sc.getRealPath("/dbFile/Shoestore.db");
+		return DriverManager.getConnection("jdbc:sqlite:" + path);
 
-    }
+	}
 
-    private void closeConnection(Connection connection) {
-        if (connection == null)
-            return;
-        try {
-            connection.close();
-        } catch (SQLException ex) {
-        }
-    }
+	private void closeConnection(Connection connection) {
+		if (connection == null)
+			return;
+		try {
+			connection.close();
+		} catch (SQLException ex) {
+		}
+	}
 
 	public boolean isValid(String user, String pass) {
 		int count = 0;
 		boolean valid = false;
-		String sql = "select * from users where username='"+ user +"' and password='" + pass + "'";
+		String sql = "select * from users where username='" + user + "' and password='" + pass + "'";
 
 		Connection connection = null;
 		try {
@@ -65,9 +65,31 @@ public class LoginDAOImpl implements LoginDAO {
 		}
 		return valid;
 	}
-    
-    
-    
 
-    // get
+	//check if the user is an admin
+	@Override
+	public boolean isAdmin(String user) {
+	    int isAdmin = 0;
+	    String sql = "SELECT is_admin FROM users WHERE username = ?";
+
+	    Connection connection = null;
+	    try {
+	        connection = getConnection();
+	        PreparedStatement statement = connection.prepareStatement(sql);
+	        statement.setString(1, user);
+
+	        ResultSet resultSet = statement.executeQuery();
+
+	        if (resultSet.next()) {
+	            isAdmin = resultSet.getInt("is_admin");
+	        }
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        closeConnection(connection);
+	    }
+
+	    // returns true if admin
+	    return isAdmin == 1;
+	}
 }
