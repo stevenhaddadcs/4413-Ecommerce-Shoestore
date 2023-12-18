@@ -6,8 +6,6 @@
 <%-- <%@page import="java.util.List"%> --%>
 <%-- <%@page import="java.util.ArrayList"%> --%>
 <%-- <%@page import="java.util.Iterator"%> --%>
-<%-- <%@page import="model.Book"%> --%>
-<%-- <%@page import="model.Category"%> --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -49,10 +47,6 @@
                 
                 
             </ul></li>
-<!--         <li><div> -->
-<!--                 <span class="label" style="margin-left: 15px;">Contact Us</span> -->
-
-<!--             </div></li> -->
     </ul>
     
     <form class="search">

@@ -41,6 +41,36 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 
+    // get all users from database USERS
+    @Override
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> userList = new ArrayList<>();
+        String sql = "SELECT * FROM USERS";
+
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                int isAdmin = resultSet.getInt("is_admin");
+                String address = resultSet.getString("address");
+                String ccNumber = resultSet.getString("cc_number");
+
+                // Create User object and add it to the list
+                User user = new User(username, password, isAdmin, address, ccNumber);
+                userList.add(user);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+        return userList;
+    }
+
     // delete user from database based on username
     @Override
     public void deleteUser(String username) {
