@@ -8,6 +8,8 @@
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
 			<link rel="stylesheet" href="css/shoestore.css" type="text/css" />
 			<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+			<script src="js/shoestore.js"></script>
+
 			<title>Manage Shoe Stock</title>
 		</head>
 
@@ -16,13 +18,11 @@
 				<jsp:include page="header.jsp" flush="true" />
 				<br />
 				<jsp:include page="adminLeftColumn.jsp" flush="true" />
-				<span class="label" style="margin-left: 15px;">Manage Shoes</span>
+				<h2><span class="label" style="margin-left: 15px;">Manage Shoe Stock</span></h2>
 			</div>
 
 			<div id="content">
-				<h2>Manage Shoe Stock</h2>
-
-				<table>
+				<table id="grid">
 					<thead>
 						<tr>
 							<th>Stock ID</th>
@@ -31,7 +31,6 @@
 							<th>Brand</th>
 							<th>Size</th>
 							<th>Stock</th>
-							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -43,13 +42,12 @@
 								<td>${shoe.colourway}</td>
 								<td>${shoe.brand}</td>
 								<td>${shoe.size}</td>
-								<td>${shoe.stock}</td>
 								<td>
 									<form action="admin" method="post">
-										<input type="hidden" name="action" value="updateShoeStock" /> <input
-											type="hidden" name="stock_id" value="${shoe.stock_id}" /> <label
-											for="newStock">New Stock:</label> <input type="number" name="newStock"
-											value="${shoe.stock}" /> <input type="submit" value="Update Stock" />
+										<input type="hidden" name="action" value="updateShoeStock" />
+										<input type="hidden" name="stock_id" value="${shoe.stock_id}" />
+										<input type="number" name="stock" value="${shoe.stock}" />
+										<input type="submit" value="Update Stock" />
 									</form>
 								</td>
 							</tr>

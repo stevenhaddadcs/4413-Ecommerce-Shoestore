@@ -60,7 +60,7 @@ public class AdminController extends HttpServlet {
                     break;
                 case "manageShoeStock":
                     // takes you to the page to manage shoes inventory
-                	ArrayList<Shoe> shoestocks = adminDAO.getAllShoeStocks();
+                    ArrayList<Shoe> shoestocks = adminDAO.getAllShoeStocks();
                     request.setAttribute("shoestocks", shoestocks);
                     url = base + "manageShoeStock.jsp";
                     break;
@@ -68,8 +68,9 @@ public class AdminController extends HttpServlet {
                 // Action cases for updating and deleting
                 case "deleteUser":
                     String username = request.getParameter("username");
+                    System.out.println(username);
                     adminDAO.deleteUser(username);
-                 // Call the DAO method to get all users
+                    // Call the DAO method to get all users
                     ArrayList<User> users1 = adminDAO.getAllUsers();
                     request.setAttribute("users", users1);
                     url = base + "manageUsers.jsp";
@@ -87,7 +88,7 @@ public class AdminController extends HttpServlet {
                     int shoe_id2 = Integer.parseInt(request.getParameter("shoe_id"));
                     float price = Float.parseFloat(request.getParameter("price"));
                     adminDAO.updateShoePrice(shoe_id2, price);
-                 // takes you to the page to manage shoes inventory
+                    // takes you to the page to manage shoes inventory
                     ArrayList<Shoe> shoetypes2 = adminDAO.getAllShoeTypes();
                     request.setAttribute("shoetypes", shoetypes2);
                     url = base + "manageShoeTypes.jsp";
@@ -96,8 +97,8 @@ public class AdminController extends HttpServlet {
                     String stock_id = request.getParameter("stock_id");
                     int stock = Integer.parseInt(request.getParameter("stock"));
                     adminDAO.updateShoeStock(stock_id, stock);
-                 // takes you to the page to manage shoes inventory
-                	ArrayList<Shoe> shoestocks1 = adminDAO.getAllShoeStocks();
+                    // takes you to the page to manage shoes inventory
+                    ArrayList<Shoe> shoestocks1 = adminDAO.getAllShoeStocks();
                     request.setAttribute("shoestocks", shoestocks1);
                     url = base + "manageShoeStock.jsp";
                     break;
