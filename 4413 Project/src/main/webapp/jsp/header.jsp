@@ -16,7 +16,14 @@
 							class="label">Login/Register</span></a>
 				</c:if>
 				<c:if test="${sessionScope.loginStatus == 'true'}">
-					<c:if test="${sessionScope.adminStatus == 'true'}">
+					
+					<a href="${initParam.param3}?action=logout"><span
+							style="float:right; margin:20px; margin-right:100px; font-size:30px"
+							class="label">Logout</span></a>
+					<a href="${initParam.param3}?action=profile"><span
+							style="float:right; margin:20px; margin-right:120px; font-size:30px"
+							class="label">Profile</span></a>
+							<c:if test="${sessionScope.adminStatus == 'true'}">
 						<a href="${initParam.param4}?action=admin"><span
 								style="float:right; margin:20px; margin-right:100px; font-size:30px" class="label">Admin
 								View</span></a>
@@ -24,12 +31,6 @@
 								style="float:right; margin:20px; margin-right:100px; font-size:30px"
 								class="label">Customer View</span></a>
 					</c:if>
-					<a href="${initParam.param3}?action=logout"><span
-							style="float:right; margin:20px; margin-right:100px; font-size:30px"
-							class="label">Logout</span></a>
-					<a href="${initParam.param3}?action=profile"><span
-							style="float:right; margin:20px; margin-right:120px; font-size:30px"
-							class="label">Profile</span></a>
 				</c:if>
 
 			</h2>

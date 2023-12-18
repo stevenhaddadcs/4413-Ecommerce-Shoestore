@@ -79,6 +79,8 @@ public class LoginController extends HttpServlet {
 				boolean validLogin = check.isValid(username, password);
 				if(validLogin) {
 					request.getSession(true).setAttribute("loginStatus", "true");
+					//checks if admin so that they can access the admin view
+					request.getSession(true).setAttribute("adminStatus", check.isAdmin(username));
 					User user = check.getUser(username);
 					request.getSession(true).setAttribute("user", user);
 				}else {
