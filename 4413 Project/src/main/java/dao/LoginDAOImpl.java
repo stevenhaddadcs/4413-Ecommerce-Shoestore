@@ -98,10 +98,10 @@ public class LoginDAOImpl implements LoginDAO {
 		try {
 			connection = getConnection();
 	        String purchaseString = "INSERT INTO USERS (username, password) VALUES (?, ?)";
-	        PreparedStatement purchaseStatement = connection.prepareStatement(purchaseString);
-	        purchaseStatement.setString(1, user);
-	        purchaseStatement.setString(2, pass);
-	        purchaseStatement.executeUpdate();
+	        PreparedStatement statement = connection.prepareStatement(purchaseString);
+	        statement.setString(1, user);
+	        statement.setString(2, pass);
+	        statement.executeUpdate();
 	        
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -137,4 +137,119 @@ public class LoginDAOImpl implements LoginDAO {
 	    // returns true if admin
 	    return isAdmin == 1;
 	}
+
+    @Override
+    public void changeUser(String usernameOld, String usernameNew) {
+        // TODO Auto-generated method stub
+        String updateUsernameSQL = "";
+        
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement updateUsernameStatement;
+            
+            updateUsernameSQL = "UPDATE users SET username = ? WHERE username = ?";
+            updateUsernameStatement = connection.prepareStatement(updateUsernameSQL);
+            updateUsernameStatement.setString(1, usernameNew);
+            updateUsernameStatement.setString(1,  usernameOld);
+            updateUsernameStatement.execute();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+    }
+
+	@Override
+	public void changePassword(String username, String password) {
+		// TODO Auto-generated method stub
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            String add = "UPDATE USERS SET password= ? WHERE username= ?";
+            PreparedStatement statement = connection.prepareStatement(add);
+            statement.setString(1, password);
+            statement.setString(2, username);
+            statement.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+	}
+
+	@Override
+	public void changeAddress(String username, String address) {
+		// TODO Auto-generated method stub
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            String add = "UPDATE USERS SET address= ? WHERE username= ?";
+            PreparedStatement statement = connection.prepareStatement(add);
+            statement.setString(1, address);
+            statement.setString(2, username);
+            statement.executeUpdate();   
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+	}
+
+
+	@Override
+	public void changeCC(String username, String cc) {
+		// TODO Auto-generated method stub
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            String add = "UPDATE USERS SET cc_number= ? WHERE username= ?";
+            PreparedStatement statement = connection.prepareStatement(add);
+            statement.setString(1, cc);
+            statement.setString(2, username);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+	}
+	
+	public User getUser(String username) {
+		// TODO Auto-generated method stub
+		User user = new User();
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            String add = "select * from users where username=?";
+            PreparedStatement statement = connection.prepareStatement(add);
+            statement.setString(1, username);
+            statement.executeQuery();
+            
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+            	String name = rs.getString(1);
+            	String pass = rs.getString(2);
+            	int isAdmin = rs.getInt(3);
+            	String address = rs.getString(4);
+            	String cc = rs.getString(5);
+            	
+            	user.setUsername(name);
+            	user.setPassword(pass);
+            	user.setIsAdmin(isAdmin);
+            	user.setAddress(address);
+            	user.setCc_number(cc);
+            } 
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+        return user;
+	}
+
+
 }

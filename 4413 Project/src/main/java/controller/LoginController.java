@@ -79,9 +79,7 @@ public class LoginController extends HttpServlet {
 				boolean validLogin = check.isValid(username, password);
 				if(validLogin) {
 					request.getSession(true).setAttribute("loginStatus", "true");
-					User user = new User();
-					user.setUsername(username);
-					user.setPassword(password);
+					User user = check.getUser(username);
 					request.getSession(true).setAttribute("user", user);
 				}else {
 					request.setAttribute("loginFail", "true");
@@ -119,19 +117,6 @@ public class LoginController extends HttpServlet {
 				url = base + "profile.jsp";
 				break;	
 			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
 		}
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
