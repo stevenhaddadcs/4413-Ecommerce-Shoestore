@@ -13,6 +13,7 @@
 			</c:if>
 			<c:if test="${sessionScope.loginStatus == 'true'}">
 			<a href="${initParam.param3}?action=logout"><span style="float:right; margin:20px; margin-right:100px; font-size:30px" class="label" >Logout</span></a>
+			<a href="${initParam.param3}?action=profile"><span style="float:right; margin:20px; margin-right:120px; font-size:30px" class="label" >Profile</span></a>
 			</c:if>
 	</h2>
 </div>

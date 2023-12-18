@@ -27,15 +27,15 @@ import dao.LoginDAOImpl;
 /**
  * Servlet implementation class CartServlet
  */
-@WebServlet("/LoginController")
-public class LoginController extends HttpServlet {
+@WebServlet("/ProfileController")
+public class ProfileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	ServletContext context;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public ProfileController() {
         super();
         // TODO Auto-generated constructor stub
     }
