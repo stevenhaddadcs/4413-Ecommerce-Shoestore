@@ -136,7 +136,6 @@ public class CartController extends HttpServlet {
 					
 					cartDao.checkout(cart, user.getUsername(), ccard, address);
 					System.out.println("You have been checked out");
-					
 					Cart newCart = new Cart();
 					request.getSession(true).setAttribute("cart", newCart);
 				}else if(ccard == "" || !matchFlag) {
