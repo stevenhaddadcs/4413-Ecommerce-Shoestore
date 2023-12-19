@@ -266,4 +266,71 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 
+    @Override
+    // change this to get all purchases
+    public ArrayList<Purchase> getAllPurchases() {
+        ArrayList<Purchase> result = new ArrayList<>();
+
+        String sql = "SELECT * FROM PURCHASES";
+
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int purchaseId = resultSet.getInt("purchase_id");
+                String username = resultSet.getString("username");
+                String itemsIds = resultSet.getString("items_ids");
+                String ccNumber = resultSet.getString("cc_number");
+                String address = resultSet.getString("address");
+                String purchaseDate = resultSet.getString("purchase_date");
+
+                Purchase purchase = new Purchase(purchaseId, username, itemsIds, ccNumber, address, purchaseDate);
+                result.add(purchase);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+
+        return result;
+    }
+
+    @Override
+    // get purchases by username
+    public ArrayList<Purchase> getUserPurchases(String username) {
+        ArrayList<Purchase> result = new ArrayList<>();
+
+        String sql = "SELECT * FROM PURCHASES WHERE username = ?";
+
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int purchaseId = resultSet.getInt("purchase_id");
+                // already have username
+                String itemsIds = resultSet.getString("items_ids");
+                String ccNumber = resultSet.getString("cc_number");
+                String address = resultSet.getString("address");
+                String purchaseDate = resultSet.getString("purchase_date");
+
+                Purchase purchase = new Purchase(purchaseId, username, itemsIds, ccNumber, address, purchaseDate);
+                result.add(purchase);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+
+        return result;
+    }
+
 }

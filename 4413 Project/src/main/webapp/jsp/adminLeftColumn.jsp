@@ -25,6 +25,8 @@
 												style="margin-left: 15px;">Manage Shoe Types</span></a></li>
 									<li><a class="link1" href="admin?action=manageShoeStock"><span class="label"
 												style="margin-left: 15px;">Manage Shoe Stock</span></a></li>
+									<li><a class="link1" href="admin?action=managePurchaseOrders"><span class="label"
+												style="margin-left: 15px;">Manage Purchase Orders</span></a></li>
 
 								</ul>
 							</div>

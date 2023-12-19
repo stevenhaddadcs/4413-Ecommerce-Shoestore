@@ -22,4 +22,9 @@ public interface AdminDAO {
     public void updateShoeStock(String stock_id, int stock);
 
     public void updateShoePrice(int shoe_id, float price);
+
+    public ArrayList<Purchase> getAllPurchases();
+
+    // get purchases by username
+    public ArrayList<Purchase> getUserPurchases(String username);
 }
