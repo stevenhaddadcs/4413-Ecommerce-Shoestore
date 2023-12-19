@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html>
@@ -12,11 +13,17 @@
 </head>
 
 <body>
-    <div id="centered">
-        <jsp:include page="header.jsp" flush="true" />
-        <br />
-        <jsp:include page="adminLeftColumn.jsp" flush="true" /> 
-        <span class="label" style="margin-left: 15px;">Admin Home</span>
-    </div>
+	<div id="centered">
+		<jsp:include page="header.jsp" flush="true" />
+		<br />
+		<jsp:include page="adminLeftColumn.jsp" flush="true" />
+		<span class="label" style="margin-left: 15px;">Admin Home</span>
+	</div>
+
+	<div id="welcome-message">
+		<%-- Retrieve the admin username from the session --%>
+		<p>Hello, ${sessionScope.user}! Welcome to the Admin Home page.</p>
+
+	</div>
 </body>
 </html>
