@@ -27,7 +27,7 @@
 						<a href="${initParam.param4}?action=admin"><span
 								style="float:right; margin:20px; margin-right:100px; font-size:30px" class="label">Admin
 								View</span></a>
-						<a href="${initParam.param1}?action=shoes"><span
+						<a href="${initParam.param1}"><span
 								style="float:right; margin:20px; margin-right:100px; font-size:30px"
 								class="label">Customer View</span></a>
 					</c:if>
