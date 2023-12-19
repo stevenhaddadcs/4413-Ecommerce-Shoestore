@@ -22,7 +22,7 @@
 
 	<div id="welcome-message">
 		<%-- Retrieve the admin username from the session --%>
-		<p>Hello, ${sessionScope.user}! Welcome to the Admin Home page.</p>
+		<p>Hello, ${sessionScope.user.username}! Welcome to the Admin Home page.</p>
 
 	</div>
 </body>
