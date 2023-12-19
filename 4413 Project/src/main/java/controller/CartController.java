@@ -122,15 +122,19 @@ public class CartController extends HttpServlet {
 				
 				
 				if(matchFlag && address != "") {
-					user.setAddress(address);
-					user.setCc_number(ccard);
 					LoginDAO check = new LoginDAOImpl(context);
-					check.changeAddress(user.getUsername(), address);
-					check.changeCC(user.getUsername(), ccard);
+					if(user.getAddress().equals(null)) {
+						user.setAddress(address);
+						check.changeAddress(user.getUsername(), address);
+					}
+					if(user.getCc_number().equals(null)) {
+						user.setCc_number(ccard);
+						check.changeCC(user.getUsername(), ccard);
+					}
 					
 					request.getSession(true).setAttribute("user",user);
 					
-					cartDao.checkout(cart, user.getUsername(), user.getCc_number(), user.getAddress());
+					cartDao.checkout(cart, user.getUsername(), ccard, address);
 					System.out.println("You have been checked out");
 					Cart newCart = new Cart();
 					request.getSession(true).setAttribute("cart", newCart);
