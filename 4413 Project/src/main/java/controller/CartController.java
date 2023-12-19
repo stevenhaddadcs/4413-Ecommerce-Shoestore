@@ -123,11 +123,11 @@ public class CartController extends HttpServlet {
 				
 				if(matchFlag && address != "") {
 					LoginDAO check = new LoginDAOImpl(context);
-					if(user.getAddress().equals(null)) {
+					if(user.getAddress() == null) {
 						user.setAddress(address);
 						check.changeAddress(user.getUsername(), address);
 					}
-					if(user.getCc_number().equals(null)) {
+					if(user.getCc_number() == null) {
 						user.setCc_number(ccard);
 						check.changeCC(user.getUsername(), ccard);
 					}
