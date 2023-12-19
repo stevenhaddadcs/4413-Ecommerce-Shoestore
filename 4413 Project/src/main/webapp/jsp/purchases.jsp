@@ -22,6 +22,7 @@
             <tr>
                 <th id="th-items">Items</th>
                 <th id="th-address">Address</th>
+                 <th id="th-cc">Credit Card</th>
                 <th id="th-date">Date</th>
                 
             </tr>
@@ -35,6 +36,7 @@
             <tr>
              <td> ${e.items_ids}</td>
              <td> ${e.address} </td>
+              <td> ${e.ccNumber} </td>
              <td> ${e.purchase_date} </td>
             </tr>
             </c:forEach>

@@ -46,9 +46,16 @@
              <td>${e.brand} ${e.model}</td>
              <td> ${e.colourway} </td>
              <td> ${e.size} </td>
-             <td> ${e.price} </td>
+             <td> $${e.price} </td>
             </tr>
             </c:forEach>
+            <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total Price: $${requestScope.total}</td>  
+            </tr>
             <tr>
             <td> <c:if test="${sessionScope.user.cc_number == null}" >
             	<span style="margin-left: 15px"> Credit Card: </span>

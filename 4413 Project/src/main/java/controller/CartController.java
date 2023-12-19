@@ -152,6 +152,13 @@ public class CartController extends HttpServlet {
 		// TODO Auto-generated method stub
 	    Cart cart = (Cart) request.getSession(true).getAttribute("cart");
 	    List<Shoe> shoeList = cart.getAll();
+	    float total = 0;
+	    for(int i = 0; i <shoeList.size(); i++) {
+	    	float temp = shoeList.get(i).getPrice();
+	    	total = total + temp;
+	    }
+	    
+	    request.setAttribute("total", total);
 	    request.setAttribute("shoeList", shoeList);
 	    
 	}

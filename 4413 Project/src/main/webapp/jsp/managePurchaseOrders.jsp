@@ -45,10 +45,10 @@
                             <tr>
                                 <td>${purchase.purchaseId}</td>
                                 <td>${purchase.username}</td>
-                                <td>${purchase.itemsIds}</td>
+                                <td>${purchase.items_ids}</td>
                                 <td>${purchase.ccNumber}</td>
                                 <td>${purchase.address}</td>
-                                <td>${purchase.purchaseDate}</td>
+                                <td>${purchase.purchase_date}</td>
                             </tr>
                         </c:forEach>
                     </tbody>
