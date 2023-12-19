@@ -40,7 +40,7 @@
 				<td><a href="${initParam.param1}?action=stock&model=Dunks Low&colour=Green, White"><img src="${initParam.imageURL}/Nike - Dunks Low - Green, White.png" id="shoeImage"/></a><p id="caption">Nike Dunks Low Green/White</p></td>
 				<td><a href="${initParam.param1}?action=stock&model=Roshe One&colour=Black"><img src="${initParam.imageURL}/Nike - Roshe One - Black.png" id="shoeImage"/></a><p id="caption">Nike Roshe One Black</p></td>
 				<td><a href="${initParam.param1}?action=stock&model=Roshe One&colour=Grey, White"><img src="${initParam.imageURL}/Nike - Roshe One - Grey, White.png" id="shoeImage"/></a><p id="caption">Nike Roshe One Grey/White</p></td>
-				<td><a href="${initParam.param1}?action=stock&model=Roshe One&colour=Navy, White, Black"><img src="${initParam.imageURL}/Nike - Roshe One - Navy, White, Black.png" id="shoeImage"/></a><p id="caption">Nike Roshe One Navy/White/Black</p></td>
+				<td><a href="${initParam.param1}?action=stock&model=Roshe One&colour=Navy, White, Blue"><img src="${initParam.imageURL}/Nike - Roshe One - Navy, White, Black.png" id="shoeImage"/></a><p id="caption">Nike Roshe One Navy/White/Black</p></td>
 				<td><a href="${initParam.param1}?action=stock&model=Zoom Fly 5&colour=Black"><img src="${initParam.imageURL}/Nike - Zoom Fly 5 - Black.png" id="shoeImage"/></a><p id="caption">Nike Zoom Fly 5 Black</p></td>
 			</tr>
 			<tr>

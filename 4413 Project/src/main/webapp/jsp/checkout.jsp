@@ -62,7 +62,8 @@
             	<input type = "text" id="ccard" name="ccard" value="${requestScope.ccard}"/>
             </c:if>
              <c:if test="${sessionScope.user.cc_number != null}" >
-            	<input type = "hidden" id="ccard" name="ccard" value="${sessionScope.user.cc_number}"/>
+             <span style="margin-left: 15px"> Credit Card: </span>
+            	<input type = "text" id="ccard" name="ccard" value="${sessionScope.user.cc_number}"/>
             </c:if>
             </td>
 			<td> <c:if test="${sessionScope.user.address == null}" >
@@ -70,7 +71,8 @@
            		<input type = "text" id="address" name="address" value="${requestScope.address}"/>
             </c:if>
              <c:if test="${sessionScope.user.address != null}" >
-           		<input type = "hidden" id="address" name="address" value="${sessionScope.user.address}"/>
+             <span style="margin-left: 15px"> Address: </span>
+           		<input type = "text" id="address" name="address" value="${sessionScope.user.address}"/>
             </c:if>
 			</td>
 			<td></td>
