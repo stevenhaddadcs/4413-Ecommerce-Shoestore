@@ -43,7 +43,7 @@
 				</select>
 			</td>
 			<td>
-				<input type = "text" id="stock" value = "${requestScope.shoeStockList[0].getStock()}"/>
+				<input type = "number" id="stock" value = "${requestScope.shoeStockList[0].getStock()}"/>
 			</td>
 		</tr>
 		<tr>
