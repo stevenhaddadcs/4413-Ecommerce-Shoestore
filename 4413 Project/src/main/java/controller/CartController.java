@@ -130,7 +130,7 @@ public class CartController extends HttpServlet {
 					
 					request.getSession(true).setAttribute("user",user);
 					
-					cartDao.checkout(cart, user.getUsername(), user.getPassword(), user.getAddress());
+					cartDao.checkout(cart, user.getUsername(), user.getCc_number(), user.getAddress());
 					System.out.println("You have been checked out");
 					Cart newCart = new Cart();
 					request.getSession(true).setAttribute("cart", newCart);
