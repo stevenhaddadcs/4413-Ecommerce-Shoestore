@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.AdminDAOImpl;
+import dao.ShoeDAO;
+import dao.ShoeDAOImpl;
 import model.Purchase;
 import model.Shoe;
 import model.User;
@@ -137,6 +139,9 @@ public class AdminController extends HttpServlet {
 			}
 		}
 
+		ShoeDAO shoeDao = new ShoeDAOImpl(context);
+		List<Shoe> shoeTypes = shoeDao.findAllShoes();
+		request.setAttribute("shoeTypes", shoeTypes);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}

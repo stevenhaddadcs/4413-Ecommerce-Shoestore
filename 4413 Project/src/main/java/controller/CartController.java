@@ -152,6 +152,9 @@ public class CartController extends HttpServlet {
 
 		}
 		
+		ShoeDAO shoeDao = new ShoeDAOImpl(context);
+		List<Shoe> shoeTypes = shoeDao.findAllShoes();
+		request.setAttribute("shoeTypes", shoeTypes);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
 		requestDispatcher.forward(request, response);
 		

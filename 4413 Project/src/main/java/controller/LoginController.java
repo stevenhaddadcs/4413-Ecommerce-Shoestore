@@ -132,9 +132,6 @@ public class LoginController extends HttpServlet {
 				break;
 			case "logout":
 				// get shoes so that it loads when home.jsp is called
-				ShoeDAO shoeDao = new ShoeDAOImpl(context);
-				List<Shoe> shoeTypes = shoeDao.findAllShoes();
-				request.setAttribute("shoeTypes", shoeTypes);
 				request.getSession(true).setAttribute("loginStatus", "false");
 				break;
 			case "profile":
@@ -155,6 +152,10 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("shoeTypes", shoeTypes);
 		}
 
+		
+		ShoeDAO shoeDao = new ShoeDAOImpl(context);
+		List<Shoe> shoeTypes = shoeDao.findAllShoes();
+		request.setAttribute("shoeTypes", shoeTypes);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);
 		requestDispatcher.forward(request, response);
 
