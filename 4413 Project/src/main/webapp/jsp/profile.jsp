@@ -24,7 +24,7 @@
  		<span style="margin-left: 15px; font-size:30px"> ADDRESS IS EMPTY </span><br><br>
     	</c:when>
     	<c:when test="${requestScope.ccEmpty == 'true'}">
- 		<span style="margin-left: 15px; font-size:30px"> CREDIT CARD IS EMPTY </span><br><br>
+ 		<span style="margin-left: 15px; font-size:30px"> CREDIT CARD IS INVALID </span><br><br>
     	</c:when>
     </c:choose>
     <span style="margin-left: 15px"> Current Username: ${sessionScope.user.username} </span>
@@ -47,6 +47,8 @@
     		<input type ="submit" style="margin-left: 15px" value = "Add Credit Card" name="addCC"/>
     	</c:when>
     	<c:when test="${sessionScope.user.cc_number != null}">
+    		<span style="margin-left: 15px"> Credit Card: ${sessionScope.user.cc_number} </span>
+    		<br><br>
     		<input type ="submit" style="margin-left: 15px" value = "Change Credit Card" name="changeCC"/>
     	</c:when>
     </c:choose>

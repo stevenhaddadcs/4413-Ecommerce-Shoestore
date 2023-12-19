@@ -32,6 +32,9 @@
     	<c:when test="${requestScope.passwordInvalid == 'true'}">
  		<span style="margin-left: 15px; font-size:30px"> NEW PASSWORD DOES NOT MATCH </span><br>
     	</c:when>
+    	<c:when test="${requestScope.ccInvalid2 == 'true'}">
+ 		<span style="margin-left: 15px; font-size:30px"> NEW CREDIT CARD IS INVALID</span><br>
+    	</c:when>
     </c:choose>
 
     <br>
@@ -45,6 +48,7 @@
 			<input type ="submit" style="margin-left: 15px" value = "Change Address" name="changeNewAddress"/>
     	</c:when>
     	<c:when test="${requestScope.changeC == 'true'}">
+    		<span style="margin-left: 15px"> Current Credit Card: ${sessionScope.user.cc_number} </span><br><br>
 			<span style="margin-left: 15px"> New Credit Card: </span>
 			<input type = "text" style="width: 200px;" name="newCC" id="newCC"/><br><br>
 			<span style="margin-left: 15px"> Confirm New Credit Card: </span>

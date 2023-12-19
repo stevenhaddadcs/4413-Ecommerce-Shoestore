@@ -4,6 +4,8 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -87,7 +89,12 @@ public class ProfileController extends HttpServlet {
 			
 		}else if(request.getParameter("addCC") != null) {
 			String creditCard = request.getParameter("creditCard");
-			if(creditCard == "") {
+			
+			Pattern ccReg = Pattern.compile("^[0-9]{15,16}$");
+			Matcher matcher = ccReg.matcher(creditCard);
+			boolean matchFlag = matcher.matches();
+			
+			if(creditCard == "" || !matchFlag) {
 				request.setAttribute("ccEmpty", "true");
 			}else {
 				user = (User) request.getSession(true).getAttribute("user");
@@ -129,17 +136,27 @@ public class ProfileController extends HttpServlet {
 			String newCC = request.getParameter("newCC");
 			String newCCCheck = request.getParameter("newCCCheck");
 			
-			if(newCC.equals(newCCCheck)) {
+			Pattern ccReg = Pattern.compile("^[0-9]{15,16}$");
+			Matcher matcher = ccReg.matcher(newCC);
+			boolean matchFlag = matcher.matches();
+			
+			if(newCC.equals(newCCCheck) && matchFlag) {
 				user = (User) request.getSession(true).getAttribute("user");
 				user.setCc_number(newCC);
 				check.changeCC(user.getUsername(), newCC);
 				request.getSession(true).setAttribute("user", user);
 				url = base + "profile.jsp";
-			}else {
+			}else if(!newCC.equals(newCCCheck)){
 				request.setAttribute("changeC", "true");
 				request.setAttribute("ccInvalid", "true");
 				url = base + "changeProfile.jsp";
 			}
+			else if(!matchFlag){
+				request.setAttribute("changeC", "true");
+				request.setAttribute("ccInvalid2", "true");
+				url = base + "changeProfile.jsp";
+			}
+
 			
 		}else if(request.getParameter("changeNewUsername") != null) {
 			String newUsername = request.getParameter("newUsername");

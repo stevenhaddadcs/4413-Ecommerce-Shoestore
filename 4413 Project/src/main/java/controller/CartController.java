@@ -4,6 +4,8 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -114,8 +116,12 @@ public class CartController extends HttpServlet {
 					request.setAttribute("address", address);
 				}
 				
+				Pattern ccReg = Pattern.compile("^[0-9]{15,16}$");
+				Matcher matcher = ccReg.matcher(ccard);
+				boolean matchFlag = matcher.matches();
 				
-				if(ccard != "" && address != "") {
+				
+				if(matchFlag && address != "") {
 					user.setAddress(address);
 					user.setCc_number(ccard);
 					LoginDAO check = new LoginDAOImpl(context);
@@ -128,7 +134,7 @@ public class CartController extends HttpServlet {
 					System.out.println("You have been checked out");
 					Cart newCart = new Cart();
 					request.getSession(true).setAttribute("cart", newCart);
-				}else if(ccard == "") {
+				}else if(ccard == "" || !matchFlag) {
 					request.setAttribute("noCC", "true");
 					viewCart(request, response);
 					url = base + "checkout.jsp";

@@ -23,7 +23,7 @@
     <input type = "hidden" name = "action" value = "checkedout"/>
     <c:if test="${requestScope.noCC == 'true'}">
     <br>
-    <span style="margin-left: 15px; font-size:30px"> PLEASE ENTER A CREDIT CARD </span>
+    <span style="margin-left: 15px; font-size:30px"> INVALID CREDIT CARD</span>
     </c:if>
     <c:if test="${requestScope.noAddress == 'true'}">
     <br>
