@@ -54,6 +54,8 @@
 	<input type ="submit" style="margin-left: 15px" value = "Change Username" name="changeUser"/>
 	<br><br>
     <input type ="submit" style="margin-left: 15px" value = "Change Password" name="changePass"/>
+	<br><br><br><br>
+    <input type ="submit" style="margin-left: 15px" value = "View Purchase History" name="viewHistory"/>
     
 	</form>
 </body>

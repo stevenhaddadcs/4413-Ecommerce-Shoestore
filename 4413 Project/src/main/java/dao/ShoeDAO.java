@@ -26,5 +26,6 @@ public interface ShoeDAO {
 	public int getShoeStocks(String stockId);
 
 	public Shoe searchShoesByMCS(String m, String c, String s);
+	 public String getShoeById(String id);
 
 }

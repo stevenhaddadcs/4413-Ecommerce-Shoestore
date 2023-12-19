@@ -50,14 +50,20 @@
             </tr>
             </c:forEach>
             <tr>
-            <td> <c:if test="${requestScope.user.cc_number == null}" >
+            <td> <c:if test="${sessionScope.user.cc_number == null}" >
             	<span style="margin-left: 15px"> Credit Card: </span>
             	<input type = "text" id="ccard" name="ccard" value="${requestScope.ccard}"/>
             </c:if>
+             <c:if test="${sessionScope.user.cc_number != null}" >
+            	<input type = "hidden" id="ccard" name="ccard" value="${sessionScope.user.cc_number}"/>
+            </c:if>
             </td>
-			<td> <c:if test="${requestScope.user.address == null}" >
+			<td> <c:if test="${sessionScope.user.address == null}" >
 				<span style="margin-left: 15px"> Address: </span>
            		<input type = "text" id="address" name="address" value="${requestScope.address}"/>
+            </c:if>
+             <c:if test="${sessionScope.user.address != null}" >
+           		<input type = "hidden" id="address" name="address" value="${sessionScope.user.address}"/>
             </c:if>
 			</td>
 			<td></td>

@@ -19,6 +19,8 @@ import dao.ShoeDAO;
 import dao.ShoeDAOImpl;
 import dao.CartDAO;
 import dao.CartDAOImpl;
+import dao.LoginDAO;
+import dao.LoginDAOImpl;
 import model.Shoe;
 import model.User;
 import model.Cart;
@@ -115,6 +117,11 @@ public class CartController extends HttpServlet {
 				
 				if(ccard != "" && address != "") {
 					user.setAddress(address);
+					user.setCc_number(ccard);
+					LoginDAO check = new LoginDAOImpl(context);
+					check.changeAddress(user.getUsername(), address);
+					check.changeCC(user.getUsername(), ccard);
+					
 					request.getSession(true).setAttribute("user",user);
 					
 					cartDao.checkout(cart, user.getUsername(), user.getPassword(), user.getAddress());

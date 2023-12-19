@@ -21,9 +21,12 @@ import dao.CartDAO;
 import dao.CartDAOImpl;
 import model.Shoe;
 import model.Cart;
+import model.Purchase;
 import model.User;
 import dao.LoginDAO;
 import dao.LoginDAOImpl;
+import dao.PurchaseDAO;
+import dao.PurchaseDAOImpl;
 /**
  * Servlet implementation class CartServlet
  */
@@ -62,7 +65,7 @@ public class ProfileController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String base = "/jsp/";
-		String url = base + "home.jsp";
+		String url = base + "profile.jsp";
 		User user;
 		LoginDAO check = new LoginDAOImpl(context);
 		
@@ -170,6 +173,28 @@ public class ProfileController extends HttpServlet {
 				url = base + "changeProfile.jsp";
 			}
 			
+		}else if(request.getParameter("viewHistory") != null) {
+			user = (User) request.getSession(true).getAttribute("user");
+			PurchaseDAO get = new PurchaseDAOImpl(context);
+			ShoeDAO find = new ShoeDAOImpl(context);
+			List<Purchase> purchases = get.getUserPurchases(user.getUsername());
+			
+			for(int i = 0; i < purchases.size(); i++) {
+				String fullItems = "";
+				String proper = "";
+				String [] commaSplit = purchases.get(i).getItems_ids().split(",");
+				for(int j = 0; j < commaSplit.length; j++) {
+					String [] dashSplit = commaSplit[j].split("_");
+					String model = find.getShoeById(dashSplit[0]);
+					String size = dashSplit[1];
+					proper = model + " Size:" + size;
+					fullItems = fullItems + proper + " AND ";
+				}
+				fullItems = fullItems.substring(0, fullItems.length() - 5);
+				purchases.get(i).setItems_ids(fullItems);
+			}
+			request.setAttribute("purchaseHistory", purchases);
+			url = base + "purchases.jsp";
 		}
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(url);

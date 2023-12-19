@@ -38,11 +38,11 @@ public class Purchase {
         this.username = username;
     }
 
-    public String getItemsIds() {
+    public String getItems_ids() {
         return items_ids;
     }
 
-    public void setItemsIds(String items_ids) {
+    public void setItems_ids(String items_ids) {
         this.items_ids = items_ids;
     }
 
@@ -62,11 +62,11 @@ public class Purchase {
         this.address = address;
     }
 
-    public String getPurchaseDate() {
+    public String getPurchase_date() {
         return purchase_date;
     }
 
-    public void setPurchaseDate(String purchase_date) {
+    public void setPurchase_date(String purchase_date) {
         this.purchase_date = purchase_date;
     }
 }

@@ -376,5 +376,34 @@ public class ShoeDAOImpl implements ShoeDAO {
 
 		return result;
 	}
+    public String getShoeById(String id) {
+        String shoe = "";
+        char temp = id.charAt(0);
+        
+        if(temp == ' ') {
+        	id = id.substring(1);
+        }
+    	
+        Connection connection = null;
+        try {
+            connection = getConnection();
+            String getShoe = "select * from shoetypes where shoe_id = ? ";
+            PreparedStatement purchaseStatement = connection.prepareStatement(getShoe);
+            purchaseStatement.setString(1, id);
+            purchaseStatement.executeQuery();
+            
+            ResultSet rs = purchaseStatement.executeQuery();
+            while(rs.next()) {
+            	shoe = rs.getString(2) + " " + rs.getString(3);
+            }
 
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection(connection);
+        }
+        
+        return shoe;
+    }
 }
