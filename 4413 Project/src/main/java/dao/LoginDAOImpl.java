@@ -151,7 +151,7 @@ public class LoginDAOImpl implements LoginDAO {
             updateUsernameSQL = "UPDATE users SET username = ? WHERE username = ?";
             updateUsernameStatement = connection.prepareStatement(updateUsernameSQL);
             updateUsernameStatement.setString(1, usernameNew);
-            updateUsernameStatement.setString(1,  usernameOld);
+            updateUsernameStatement.setString(2,  usernameOld);
             updateUsernameStatement.execute();
             
         } catch (SQLException ex) {
