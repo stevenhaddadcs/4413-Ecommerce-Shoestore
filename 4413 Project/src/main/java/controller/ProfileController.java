@@ -162,15 +162,23 @@ public class ProfileController extends HttpServlet {
 			String newUsername = request.getParameter("newUsername");
 			String newUsernameCheck = request.getParameter("newUsernameCheck");
 			
-			if(newUsername.equals(newUsernameCheck)) {
+			Pattern ccReg = Pattern.compile("^[a-zA-Z0-9]{1,}$");
+			Matcher matcher = ccReg.matcher(newUsername);
+			boolean matchFlag = matcher.matches();
+			
+			if(newUsername.equals(newUsernameCheck) && matchFlag) {
 				user = (User) request.getSession(true).getAttribute("user");
 				check.changeUser(user.getUsername(), newUsername);
 				user.setUsername(newUsername);
 				request.getSession(true).setAttribute("user", user);
 				url = base + "profile.jsp";
-			}else {
+			}else if(!newUsername.equals(newUsernameCheck)){
 				request.setAttribute("changeU", "true");
 				request.setAttribute("usernameInvalid", "true");
+				url = base + "changeProfile.jsp";
+			}else if(!matchFlag) {
+				request.setAttribute("changeU", "true");
+				request.setAttribute("usernameInvalid2", "true");
 				url = base + "changeProfile.jsp";
 			}
 			

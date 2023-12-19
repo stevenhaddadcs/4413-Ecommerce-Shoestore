@@ -4,6 +4,8 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -77,6 +79,8 @@ public class LoginController extends HttpServlet {
 			case "login":
 				LoginDAO check = new LoginDAOImpl(context);
 				boolean validLogin = check.isValid(username, password);
+				
+				
 				if(validLogin) {
 					request.getSession(true).setAttribute("loginStatus", "true");
 					//checks if admin so that they can access the admin view
@@ -94,21 +98,26 @@ public class LoginController extends HttpServlet {
 			case "registerSubmit":
 				check = new LoginDAOImpl(context);
 				boolean available = check.userAvailable(usernameReg);
-				if(available && usernameReg != "" && passwordReg != "") {
+				
+				Pattern ccReg = Pattern.compile("^[a-zA-Z0-9]{1,}$");
+				Matcher matcher = ccReg.matcher(usernameReg);
+				boolean matchFlag = matcher.matches();
+				
+				if(available && matchFlag && passwordReg != "") {
 					check.register(usernameReg,passwordReg);
 					request.getSession(true).setAttribute("loginStatus", "true");
 					User user = new User();
 					user.setUsername(usernameReg);
 					user.setPassword(passwordReg);
 					request.getSession(true).setAttribute("user", user);
-				}else if(usernameReg == "") {
-					request.setAttribute("nameEmpty", "true");
+				}else if(!available){
+					request.setAttribute("nameTaken", "true");
 					url = base + "register.jsp";
 				}else if(passwordReg == "") {
 					request.setAttribute("passwordEmpty", "true");
 					url = base + "register.jsp";
-				}else {
-					request.setAttribute("nameTaken", "true");
+				}else if(usernameReg == "" || !matchFlag) {
+					request.setAttribute("nameEmpty", "true");
 					url = base + "register.jsp";
 				}
 				break;

@@ -25,7 +25,7 @@
     </c:if>
     <c:if test="${requestScope.nameEmpty == 'true'}">
     <br>
-    <span style="margin-left: 15px; font-size:30px"> USERNAME CANNOT BE EMPTY </span>
+    <span style="margin-left: 15px; font-size:30px"> USERNAME CANNOT BE EMPTY OR CONTAIN SPECIAL CHARACTERS </span>
     </c:if>
     <c:if test="${requestScope.passwordEmpty == 'true'}">
     <br>

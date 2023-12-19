@@ -29,6 +29,9 @@
     	<c:when test="${requestScope.usernameInvalid == 'true'}">
  		<span style="margin-left: 15px; font-size:30px"> NEW USERNAME DOES NOT MATCH </span><br>
     	</c:when>
+    	<c:when test="${requestScope.usernameInvalid2 == 'true'}">
+ 		<span style="margin-left: 15px; font-size:30px"> NEW USERNAME CANNOT CONTAIN SPECIAL CHARACTERS</span><br>
+    	</c:when>
     	<c:when test="${requestScope.passwordInvalid == 'true'}">
  		<span style="margin-left: 15px; font-size:30px"> NEW PASSWORD DOES NOT MATCH </span><br>
     	</c:when>
